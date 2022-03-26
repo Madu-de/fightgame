@@ -1,1 +1,26 @@
-/* You can add global styles to this file, and also import other style files */
+@import url('https://fonts.googleapis.com/css2?family=Abel&display=swap');
+
+* {
+  margin: 0;
+  padding: 0;
+  font-family: 'Abel',
+    sans-serif;
+}
+
+body {
+  background-color: rgb(216, 162, 171);
+
+  /*rgb(32, 109, 78);*/
+
+  /*rgb(127, 187, 202);*/
+}
+
+.fadeInObject {
+  animation: fadeIn 0.5s;
+}
+
+@keyframes fadeIn {
+  0% {
+    transform: scale(30%);
+  }
+}

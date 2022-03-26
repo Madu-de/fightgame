@@ -1,0 +1,34 @@
+.buttons-bottom {
+
+  position: absolute;
+  bottom: 0;
+  left: 0;
+
+  height: 90px;
+  width: 100%;
+  z-index: 500;
+  background-color: rgba(255, 255, 255, 0.5);
+}
+
+.buttons {
+  margin-top: 20px;
+  display: grid;
+  text-align: center;
+}
+
+.play {
+  grid-row: 1;
+}
+
+
+.inv {
+  grid-row: 1;
+}
+
+.shop {
+  grid-row: 1;
+}
+
+.settings {
+  grid-row: 1;
+}

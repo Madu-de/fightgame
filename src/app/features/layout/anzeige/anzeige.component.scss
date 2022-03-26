@@ -1,0 +1,50 @@
+.anzeige-top {
+
+  position: absolute;
+  top: 0;
+  left: 0;
+
+  display: grid;
+  grid-column-start: 1;
+  grid-column-end: 6;
+  width: 100%;
+  height: 34px;
+  background-color: rgba(255, 255, 255, 0.5);
+  z-index: 500;
+}
+
+img {
+  height: 50%;
+  width: auto;
+}
+
+.anzeige {
+  grid-row: 1;
+  margin-top: 5px;
+  display: grid;
+
+  img {
+    grid-row: 1;
+  }
+
+  p {
+    grid-row: 1;
+    font-size: 1.35em;
+  }
+}
+
+.hp {
+  grid-column: 1;
+}
+
+.damage {
+  grid-column: 2;
+}
+
+.shield {
+  grid-column: 3;
+}
+
+.gold {
+  grid-column: 6;
+}

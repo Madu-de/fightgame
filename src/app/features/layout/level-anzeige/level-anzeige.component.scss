@@ -1,0 +1,25 @@
+.level-xp-anzeige {
+  position: absolute;
+  bottom: 90px;
+  left: 0px;
+  z-index: 500;
+
+  display: block;
+  width: 100%;
+  height: auto;
+
+  text-align: center;
+  font-size: 1.5rem;
+
+  .level-anzeige {
+    margin-bottom: 5px;
+  }
+
+  .xp-anzeige {
+    height: 3px;
+    /* width wird nach dem XP Stand gesetzt. */
+    width: 90%;
+    background-color: green;
+  }
+
+}
