@@ -1,29 +1,29 @@
 <div ngClass="play-component" class="play-component">
   <div ngClass="card-play" class="card-play fadeInObject">
-    <h1>Felipe</h1>
-    <p>End-Boss</p>
-    <img src="./assets/card/placeholder.png" alt="placeholder">
+    <h1>{{this.game.enemy.name}}</h1>
+    <p>{{this.game.enemy.description}}</p>
+    <img [src]="this.game.enemy.image.src" [alt]="this.game.enemy.image.alt">
     <table>
       <tr>
         <th>Spezies</th>
-        <td>Boss</td>
+        <td>{{this.game.enemy.spezies}}</td>
       </tr>
       <tr>
         <th>Angriff</th>
-        <td>200</td>
+        <td>{{this.game.enemy.stats.attack}}</td>
       </tr>
       <tr>
         <th>Leben</th>
-        <td>5000</td>
+        <td>{{this.game.enemy.stats.life}}</td>
       </tr>
       <tr>
         <th>Schild</th>
-        <td>2000</td>
+        <td>{{this.game.enemy.stats.shield}}</td>
       </tr>
     </table>
     <div ngClass="interaction" class="interaction">
-      <button ngClass="go" onclick="location.href = 'https://www.google.com/'">Gehen</button>
-      <button ngClass="fight">Kämpfen</button>
+      <button *ngIf="this.game.enemy.buttonLeft.show" (click)="this.game.enemy.buttonLeft.click();">{{this.game.enemy.buttonLeft.content}}</button>
+      <button *ngIf="this.game.enemy.buttonRight.show" (click)="this.game.enemy.buttonRight.click();">{{this.game.enemy.buttonRight.content}}</button>
     </div>
   </div>
 </div>

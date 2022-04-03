@@ -2,11 +2,15 @@ import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 
 import { PlayComponent } from './features/play/play.component';
+import { LoadComponent } from './features/load/load.component';
+import { CreateComponent } from './features/create/create.component'
 
 const routes: Routes = [
-  { path: '', component: PlayComponent },
-  { path: 'play', component: PlayComponent }
-  /*{ path: 'shop', component: shop},
+  { path: '', component: LoadComponent },
+  { path: 'play', component: PlayComponent },
+  { path: 'create', component: CreateComponent }
+  /*
+  { path: 'shop', component: shop},
   { path: 'accessoires', component: accessoires},
   { path: 'settings', component: settings}
   */

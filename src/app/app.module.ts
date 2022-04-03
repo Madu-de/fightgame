@@ -1,25 +1,30 @@
 import { NgModule } from '@angular/core';
+import { CommonModule } from '@angular/common';
 import { BrowserModule } from '@angular/platform-browser';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { ButtonsBottomComponent } from './features/layout/buttons-bottom/buttons-bottom.component';
 import { AnzeigeComponent } from './features/layout/anzeige/anzeige.component';
-import { LevelAnzeigeComponent } from './features/layout/level-anzeige/level-anzeige.component'
+import { PlayComponent } from './features/play/play.component';
 import { GameService } from './services/game.service';
+import { UserService } from './services/user.service';
+import { LevelAnzeigeComponent } from './features/layout/level-anzeige/level-anzeige.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     ButtonsBottomComponent,
     AnzeigeComponent,
-    LevelAnzeigeComponent
+    LevelAnzeigeComponent,
+    PlayComponent
   ],
   imports: [
+    CommonModule,
     BrowserModule,
     AppRoutingModule
   ],
-  providers: [GameService],
+  providers: [GameService, UserService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

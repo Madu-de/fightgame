@@ -13,13 +13,24 @@
 
   .level-anzeige {
     margin-bottom: 5px;
+    font-weight: bold;
+    font-size: 1.8rem;
   }
 
   .xp-anzeige {
     height: 3px;
-    /* width wird nach dem XP Stand gesetzt. */
-    width: 90%;
-    background-color: green;
+    background-color: rgb(101, 197, 252);
+    transition-duration: 1s;
   }
 
+  animation-name: fadeInFromBottom;
+  animation-duration: 0.5s;
+
+}
+
+@keyframes fadeInFromBottom {
+  0% {
+    transform: translateY(90px);
+    opacity: 0;
+  }
 }

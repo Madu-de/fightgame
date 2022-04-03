@@ -3,16 +3,26 @@
 * {
   margin: 0;
   padding: 0;
-  font-family: 'Abel',
-    sans-serif;
+  font-family: 'Abel', sans-serif;
 }
 
 body {
-  background-color: rgb(216, 162, 171);
-
-  /*rgb(32, 109, 78);*/
-
-  /*rgb(127, 187, 202);*/
+  height: 100vh;
+  //background-image: linear-gradient(to top right, rgb(61, 99, 61), rgb(13, 77, 13));
+  background-image: url('./assets/background.jpg');
+  background-repeat: no-repeat;
+  background-size: cover;
+  //background-color: rgb(217, 163, 172);
+  //rgb(32, 109, 78);
+  //rgb(127, 187, 202);
+  // deactivate scrollbar
+  overflow: hidden;
+  // deactivate select
+  user-select: none; // Chrome and Opera
+  -webkit-user-select: none; // Safari 
+  -khtml-user-select: none; // Konqueror HTML 
+  -moz-user-select: none; // Firefox 
+  -ms-user-select: none; // Internet Explorer/Edge 
 }
 
 .fadeInObject {

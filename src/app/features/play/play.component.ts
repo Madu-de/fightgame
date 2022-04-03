@@ -8,14 +8,10 @@ import { GameService } from 'src/app/services/game.service';
 })
 export class PlayComponent implements OnInit {
 
-  constructor(public gameService: GameService) { }
+  constructor(public game: GameService) { }
 
   ngOnInit() {
-    this.randomaction();
-    this.gameService.test();
-  }
-
-  randomaction() {
+    //this.game.checkData('/play', '');
   }
 
 }

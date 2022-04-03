@@ -1,18 +1,18 @@
 <div ngClass="anzeige-top">
   <div ngClass="hp anzeige" >
     <img src="./assets/anzeige/leben.svg" alt="leben">
-    <p>200</p>
+    <p>{{user.health}}</p>
   </div>
   <div ngClass="damage anzeige">
     <img src="./assets/anzeige/damage.svg" alt="damage">
-    <p>53</p>
+    <p>{{user.attack}}</p>
   </div>
   <div ngClass="shield anzeige">
     <img src="./assets/anzeige/shield.svg" alt="shield">
-    <p>0</p>
+    <p>{{user.shield}}</p>
   </div>
   <div ngClass="gold anzeige">
     <img src="./assets/anzeige/gold.svg" alt="gold">
-    <p>235</p>
+    <p>{{user.gold}}</p>
   </div>
 </div>
