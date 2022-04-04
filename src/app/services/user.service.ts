@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { Gender } from '../enums/Gender.enum';
+import { Gender } from '../enums/gender.enum';
 
 @Injectable({
   providedIn: 'root'
@@ -7,13 +7,24 @@ import { Gender } from '../enums/Gender.enum';
 export class UserService {
 
   constructor() { }
-  public username: string = 'Madu';
-  public gender: Gender = Gender.men; // men, women or non binary
-  public health: number = 100;
-  public attack: number = 20;
+  public username: string = '';
+  public gender: Gender = Gender.men; // men or women
+  public health: number = 0;
+  public attack: number = 0;
   public shield: number = 0;
-  public lvl: number = 2;
-  public xp: number = 20;
-  public gold: number = 20;
+  public lvl: number = 0;
+  public xp: number = 0;
+  public gold: number = 0;
 
+  public addXp(xp: number) {
+    this.xp += xp;
+    if (this.xp >= 100) {
+      setTimeout(() => {
+        while (this.xp >= 100) {
+          this.lvl++;
+          this.xp -= 100;
+        }
+      }, 100)
+    }
+  }
 }

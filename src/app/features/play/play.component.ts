@@ -11,7 +11,8 @@ export class PlayComponent implements OnInit {
   constructor(public game: GameService) { }
 
   ngOnInit() {
-    //this.game.checkData('/play', '');
+    this.game.checkData('play', '');
+    this.game.saveDataFromLocalStorage();
   }
 
 }

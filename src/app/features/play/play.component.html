@@ -1,5 +1,5 @@
-<div ngClass="play-component" class="play-component">
-  <div ngClass="card-play" class="card-play fadeInObject">
+<div class="play-component">
+  <div class="card-play fadeInObject">
     <h1>{{this.game.enemy.name}}</h1>
     <p>{{this.game.enemy.description}}</p>
     <img [src]="this.game.enemy.image.src" [alt]="this.game.enemy.image.alt">
@@ -21,7 +21,7 @@
         <td>{{this.game.enemy.stats.shield}}</td>
       </tr>
     </table>
-    <div ngClass="interaction" class="interaction">
+    <div class="interaction">
       <button *ngIf="this.game.enemy.buttonLeft.show" (click)="this.game.enemy.buttonLeft.click();">{{this.game.enemy.buttonLeft.content}}</button>
       <button *ngIf="this.game.enemy.buttonRight.show" (click)="this.game.enemy.buttonRight.click();">{{this.game.enemy.buttonRight.content}}</button>
     </div>

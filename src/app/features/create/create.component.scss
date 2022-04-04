@@ -1,0 +1,76 @@
+.create-component {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+}
+
+.name {
+}
+
+.name input {
+    z-index: 20;
+    display: block;
+    border: none;
+    border: #333333 2px solid;
+    border-radius: 5px 10px 40px;
+    padding: 3px;
+    padding-left: 5px;
+    padding-right: 10px;
+    height: 40px;
+    width: 275px;
+    font-size: 1.5rem;
+    font-weight: bold;
+    text-align: center;
+    transform: translateY(-50px);
+
+    animation: inputFadeIn .5s;
+}
+
+.name button {
+    z-index: 500;
+    display: block;
+    margin-top: 20px;
+    margin: auto;
+    height: 50px;
+    width: 200px;
+    border: none;
+    border-radius: 10px;
+    border: 2px solid rgb(39, 39, 39);
+    font-size: 2rem;
+    box-shadow: 0 5px 1px black;
+
+    &:hover {
+        box-shadow: none;
+        transform: translateY(5px);
+        cursor: pointer;
+    }
+
+    animation: buttonFadeIn 0.5s;
+    transition-duration: 0.2s;
+}
+
+.men, .women {
+    width: 50px;
+    height: 50px;
+    background-color: rebeccapurple;
+    margin: 20px;
+}
+
+.none {
+    display: none;
+}
+
+@keyframes buttonFadeIn {
+    0% {
+        transform: translateY(5px);
+        box-shadow: none;
+    }
+}
+
+@keyframes inputFadeIn {
+    0% {
+        transform: translateY(25px);
+        opacity: 0;
+    }
+}

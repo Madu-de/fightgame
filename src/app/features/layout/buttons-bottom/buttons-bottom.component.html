@@ -1,23 +1,23 @@
-<div ngClass="buttons-bottom">
-  <div ngClass="buttons">
-    <div ngClass="play button">
+<div class="buttons-bottom">
+  <div class="buttons">
+    <div class="play button">
       <a routerLink="/play">
-      <img src="./assets/buttons/play.svg" alt="play">
+        <img src="./assets/buttons/play.svg" alt="play">
       </a>
     </div>
-    <div ngClass="inv button">
+    <div class="inv button">
       <a routerLink="/inventory">
-      <img src="./assets/buttons/inventory.svg" alt="inventory">
+        <img src="./assets/buttons/inventory.svg" alt="inventory">
       </a>
     </div>
-    <div ngClass="shop button">
+    <div class="shop button">
       <a routerLink="/shop">
-      <img src="./assets/buttons/shop.svg" alt="shop">
+        <img src="./assets/buttons/shop.svg" alt="shop">
       </a>
     </div>
-    <div ngClass="settings button">
+    <div class="settings button">
       <a routerLink="/settings">
-      <img src="./assets/buttons/settings.svg" alt="settings">
+        <img src="./assets/buttons/settings.svg" (click)="this.myClickHandler()" alt="settings">
       </a>
     </div>
   </div>

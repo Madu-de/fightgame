@@ -8,12 +8,13 @@ import { CreateComponent } from './features/create/create.component'
 const routes: Routes = [
   { path: '', component: LoadComponent },
   { path: 'play', component: PlayComponent },
-  { path: 'create', component: CreateComponent }
+  { path: 'create', component: CreateComponent },
   /*
   { path: 'shop', component: shop},
   { path: 'accessoires', component: accessoires},
   { path: 'settings', component: settings}
   */
+  { path: '**', component: LoadComponent }
 ];
 
 @NgModule({

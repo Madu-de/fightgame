@@ -1,2 +1,12 @@
-<video src="./assets/characters/men_animation.mp4" height="300px" loop autoplay><video>
-<video src="./assets/characters/women_animation.mp4" height="300px" loop autoplay style="margin-top: 200px;"><video>
+<div class="create-component">
+    <div class="name">
+        <input placeholder="Name" class="createNameInput" type="text" maxlength="17" min="1" autocomplete="off" autocorrect="off" spellcheck="off" (input)="checkValue()">
+        <button disabled="true" (click)="this.saveName();" class="createSubmitButton">Bestätigen</button>
+    </div>
+    <div class="men none" (click)="this.saveGender('men');">
+        Men
+    </div>
+    <div class="women none" (click)="this.saveGender('women');">
+        Women
+    </div>
+</div>
