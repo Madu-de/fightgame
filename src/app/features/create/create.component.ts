@@ -55,12 +55,11 @@ export class CreateComponent implements OnInit {
   }
 
   public setup() {
-    this.user.health = Math.floor(Math.random() * 20 + 3);
-    this.user.attack = Math.floor(Math.random() * 10 + 3);
-    this.user.shield = 0;
-    this.user.lvl = 0;
-    this.user.xp = 0;
-    this.user.gold = Math.floor(Math.random() * 5 + 1)
+    this.user.attack = Math.floor(Math.random() * 5 + 3);
+    this.user.health = Math.floor(Math.random() * 10 + this.user.attack);
+    this.user.gold = Math.floor(Math.random() * 5 + 1);
+    this.user.lvl = 1;
+    this.user.maxXp = 50;
     this.game.saveInLocalStorage(this.user, this.game.enemy);
     location.reload();
   }

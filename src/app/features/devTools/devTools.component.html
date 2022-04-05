@@ -1,0 +1,44 @@
+<div class="devTools toolsClose none">
+  <div class="button" (click)="this.close();">
+    <p>Close DevTools</p>
+  </div>
+  <div class="button" (click)="this.deleteLocalStorage()">
+    <p>Delete Localstorage</p>
+  </div>
+  <div class="button" (click)="this.game.saveDataFromLocalStorage()">
+    <p>Save from Localstorage</p>
+  </div>
+  <div class="button" (click)="this.setHealth()">
+    <p>Set Health</p>
+  </div>
+  <div class="button" (click)="this.setAttack()">
+    <p>Set Attack</p>
+  </div>
+  <div class="button" (click)="this.setShield()">
+    <p>Set Shield</p>
+  </div>
+  <div class="button" (click)="this.setGold()">
+    <p>Set Gold</p>
+  </div>
+  <div class="button" (click)="this.setXp()">
+    <p>Set Xp</p>
+  </div>
+  <div class="button" (click)="this.setLvl()">
+    <p>Set Level</p>
+  </div>
+  <div class="button" (click)="this.game.saveInLocalStorage(this.game.user, this.game.enemy)">
+    <p>Save in Localstorage</p>
+  </div>
+  <div class="button" (click)="this.openAndCloseDevToolsInput()">
+    <p>modify fg:data</p>
+  </div>
+  <div class="button" (click)="refresh()">
+    <p>Refresh</p>
+  </div>
+</div>
+
+<div class="devTools toolsOpen">
+  <div class="button" (click)="this.open();">
+    <p>Open DevTools</p>
+  </div>
+</div>

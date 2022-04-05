@@ -1,5 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
+import { Monster } from '../classes/monster';
+import { MonsterSpezies } from '../enums/monsterSpezies.enum';
 import { UserService } from './user.service';
 
 @Injectable({
@@ -7,34 +9,19 @@ import { UserService } from './user.service';
 })
 export class GameService {
 
-  constructor(private router: Router, private user: UserService) { }
+  public card = document.getElementsByClassName('card-play');
 
-  public enemy = {
-    name: 'Henrik',
-    description: 'Tutorial-Goblin',
-    image: {
-      src: './assets/card-images/tutorial-goblin.jpg',
-      alt: 'Henrik'
-    },
-    spezies: 'Goblin',
-    stats: {
-      attack: 0.5,
-      life: 1,
-      shield: 0
-    },
-    buttonLeft: {
-      content: 'Gehen',
-      show: true,
-      click: () => { }
-    },
-    buttonRight: {
-      content: 'Kämpfen',
-      show: true,
-      click: () => {
-        this.enemy.stats = this.fight(this.enemy.stats);
-      }
-    }
-  }
+  constructor(private router: Router, public user: UserService) { }
+
+  public enemy = new Monster(
+    'Henrik',
+    'Tutorial-Goblin',
+    { src: './assets/card-images/tutorial-goblin.jpg', alt: 'Henrik' },
+    MonsterSpezies.goblin,
+    { attack: 0.5, life: 1, shield: 0 },
+    { content: '', show: false, click: () => { } },
+    { content: 'Kämpfen', show: true, click: () => { this.fight(); } },
+    10);
 
   public checkData(withData: string, withoutData: string) { // Check the localstorage of the client
     let data = this.getDataFromLocalStorage();
@@ -45,17 +32,40 @@ export class GameService {
     }
   }
 
-  public fight(enemy: any): any {
-    enemy.life -= this.user.attack;
-    this.user.health -= enemy.attack;
-    if (enemy.life <= 0) { // check if the enemy is dead
-      this.user.addXp(30); // TODO give xp and more;
+  public fight() {
+    this.enemy.stats.life -= this.user.attack;
+    this.user.health -= this.enemy.stats.attack;
+    if (this.user.health <= 0) {
+      alert('Du bist tot.');
+      localStorage.clear();
+      location.reload();
+      return;
+    }
+    if (this.enemy.stats.life <= 0) { // check if the enemy is dead
+      this.user.addXp(this.enemy.xp); // TODO give xp and more;
       this.newCard();
     }
     this.saveInLocalStorage(this.user, this.enemy);
-    return enemy;
   }
+
+  public go() {
+    // TODO enemy attack you
+    this.newCard();
+  }
+
   public newCard() {
+    this.enemy.buttonLeft.click = () => { };
+    this.enemy.buttonRight.click = () => { };
+    this.card[0].classList.add('fallDown');
+    setTimeout(() => {
+      this.card[0].classList.add('none');
+      this.card[0].classList.remove('fallDown');
+      setTimeout(() => {
+        this.enemy = this.getRandomMonster();
+        this.card[0].classList.remove('none');
+        this.saveInLocalStorage(this.user, this.enemy);
+      }, 100);
+    }, 450);
   }
 
   // localstorage
@@ -89,6 +99,7 @@ export class GameService {
       this.user.shield = data.user.shield;
       this.user.lvl = data.user.lvl;
       this.user.xp = data.user.xp;
+      this.user.maxXp = data.user.maxXp;
       this.user.gold = data.user.gold;
       // enemy
       this.enemy = data.enemy;
@@ -122,5 +133,9 @@ export class GameService {
     } catch (e) {
       return false;
     }
+  }
+
+  public getRandomMonster() {
+    return new Monster('Phillip', 'Goblin', { src: 'wild', alt: 'wild' }, MonsterSpezies.goblin, { attack: 5, life: 5, shield: 2 }, { content: 'Gehen', show: true, click: () => { this.go(); } }, { content: 'Kämpfen', show: true, click: () => { this.fight(); } }, 20);
   }
 }

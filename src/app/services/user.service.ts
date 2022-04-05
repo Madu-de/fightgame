@@ -14,17 +14,27 @@ export class UserService {
   public shield: number = 0;
   public lvl: number = 0;
   public xp: number = 0;
+  public maxXp: number = 0;
   public gold: number = 0;
 
   public addXp(xp: number) {
     this.xp += xp;
-    if (this.xp >= 100) {
-      setTimeout(() => {
-        while (this.xp >= 100) {
-          this.lvl++;
-          this.xp -= 100;
-        }
-      }, 100)
+    if (this.xp >= this.maxXp) {
+      while (this.xp >= this.maxXp) {
+        this.xp -= this.maxXp;
+        this.addLvl();
+      }
     }
+  }
+
+  public addLvl() {
+    this.lvl++;
+    this.maxXp += 20;
+  }
+
+  public getXpPercent(): number {
+    let result = 100 / this.maxXp; // get 1% from the maxXp
+    result = result * this.xp; // get xp in percent
+    return result;
   }
 }

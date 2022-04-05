@@ -10,6 +10,7 @@ import { PlayComponent } from './features/play/play.component';
 import { GameService } from './services/game.service';
 import { UserService } from './services/user.service';
 import { LevelAnzeigeComponent } from './features/layout/level-anzeige/level-anzeige.component';
+import { DevToolsComponent } from './features/devTools/devTools.component';
 
 @NgModule({
   declarations: [
@@ -17,7 +18,8 @@ import { LevelAnzeigeComponent } from './features/layout/level-anzeige/level-anz
     ButtonsBottomComponent,
     AnzeigeComponent,
     LevelAnzeigeComponent,
-    PlayComponent
+    PlayComponent,
+    DevToolsComponent
   ],
   imports: [
     CommonModule,

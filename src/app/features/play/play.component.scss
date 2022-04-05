@@ -76,6 +76,10 @@ $redTwo: #b6372d;
     }
   }
 
+  .fallDown {
+    animation: fallDown 0.8s;
+  }
+
   @media (max-height : 700px) {
     .card-play {
       width: 206.25px;
@@ -117,6 +121,12 @@ $redTwo: #b6372d;
         font-size: 20px;
         margin: 2.5px;
       }
+    }
+  }
+
+  @keyframes fallDown {
+    90% {
+      transform: rotate(170deg) translateY(-1000px);
     }
   }
 }

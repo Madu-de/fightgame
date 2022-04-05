@@ -26,8 +26,16 @@ export class Monster {
         show: true,
         click: () => { }
     };
+    public xp: number = 0;
 
-    constructor(name: string, description: string, image: MonsterImage, spezies: MonsterSpezies, stats: MonsterStats, buttonLeft: CardButton, buttonRight: CardButton) {
-
+    constructor(name: string, description: string, image: MonsterImage, spezies: MonsterSpezies, stats: MonsterStats, buttonLeft: CardButton, buttonRight: CardButton, xp: number) {
+        this.name = name;
+        this.description = description;
+        this.image = image;
+        this.spezies = spezies;
+        this.stats = stats;
+        this.buttonLeft = buttonLeft;
+        this.buttonRight = buttonRight;
+        this.xp = xp;
     }
 }

@@ -6,10 +6,10 @@
 }
 
 .name {
+    z-index: 500;
 }
 
 .name input {
-    z-index: 20;
     display: block;
     border: none;
     border: #333333 2px solid;
@@ -28,7 +28,6 @@
 }
 
 .name button {
-    z-index: 500;
     display: block;
     margin-top: 20px;
     margin: auto;
@@ -51,14 +50,11 @@
 }
 
 .men, .women {
+    z-index: 500;
     width: 50px;
     height: 50px;
     background-color: rebeccapurple;
     margin: 20px;
-}
-
-.none {
-    display: none;
 }
 
 @keyframes buttonFadeIn {

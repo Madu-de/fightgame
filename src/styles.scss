@@ -29,6 +29,10 @@ body {
   animation: fadeIn 0.5s;
 }
 
+.none {
+  display: none;
+}
+
 @keyframes fadeIn {
   0% {
     transform: scale(30%);

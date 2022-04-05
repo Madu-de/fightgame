@@ -1,4 +1,4 @@
 <div class="level-xp-anzeige">
   <p class="level-anzeige">{{this.user.lvl}}</p>
-  <div class="xp-anzeige" [ngStyle]="{'width': this.user.xp + '%'}"></div>
+  <div class="xp-anzeige" [ngStyle]="{'width': this.user.getXpPercent() + '%'}"></div>
 </div>
