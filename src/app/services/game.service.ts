@@ -46,6 +46,7 @@ export class GameService {
   public fight() { // TODO shield
     if (!this.actionIsRunning) {
       this.actionIsRunning = true;
+      this.card[0].classList.remove('shake');
       this.enemy.stats.life -= this.user.attack; // attack the enemy
       if (this.enemy.stats.life < 0) {
         this.enemy.stats.life = 0;
@@ -76,6 +77,7 @@ export class GameService {
   public go() {
     if (!this.actionIsRunning) {
       this.actionIsRunning = true;
+      this.card[0].classList.remove('shake');
       let random = Math.floor(Math.random() * 5) + 1;
       if (random == 3) { // 20% chance
         this.card[0].classList.add('fallUp');
@@ -90,16 +92,18 @@ export class GameService {
               location.reload();
               return;
             }
+            this.actionIsRunning = false;
           }, 500);
         }, 850);
       } else {
+        this.actionIsRunning = false;
         this.newCard();
       }
-      this.actionIsRunning = false;
     }
   }
 
   public newCard() {
+    this.card[0].classList.remove('shake');
     this.card[0].classList.add('fallDown');
     setTimeout(() => {
       this.card[0].classList.add('none');
