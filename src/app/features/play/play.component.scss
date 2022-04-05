@@ -80,6 +80,14 @@ $redTwo: #b6372d;
     animation: fallDown 0.8s;
   }
 
+  .fallUp {
+    animation: fallDown 0.8s backwards;
+  }
+
+  .shake {
+    animation: shake 0.5s;
+  }
+
   @media (max-height : 700px) {
     .card-play {
       width: 206.25px;
@@ -127,6 +135,23 @@ $redTwo: #b6372d;
   @keyframes fallDown {
     90% {
       transform: rotate(170deg) translateY(-1000px);
+    }
+  }
+  @keyframes shake {
+    10% {
+      transform: rotate(2deg) translateX(2px) translateY(-50px);
+    }
+    20% {
+      transform: rotate(-2deg) translateX(-2px) translateY(-50px);
+    }
+    30% {
+      transform: rotate(2deg) translateX(2px) translateY(-50px);
+    }
+    40% {
+      transform: rotate(-2deg) translateX(-2px) translateY(-50px);
+    }
+    50% {
+      transform: rotate(2deg) translateX(2px) translateY(-50px);
     }
   }
 }

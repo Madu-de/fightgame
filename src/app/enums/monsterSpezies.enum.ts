@@ -3,11 +3,13 @@ export enum MonsterSpezies {
     fee = 'Fee',
     babaren = 'Babaren',
     boss = 'Boss',
-    hexe = 'hexe',
+    hexe = 'Hexe',
     zombie = 'zombie',
     drache = 'drache',
-    ork = 'ork',
+    ork = 'Ork',
     endBoss = 'End-Boss',
     riesenaffe = 'Riesenaffe',
-    assasine = 'assasine'
+    assasine = 'Assasine',
+    herrscher = 'Herrscher',
+    troll = 'Troll'
 }

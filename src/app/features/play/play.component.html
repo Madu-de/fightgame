@@ -10,15 +10,15 @@
       </tr>
       <tr>
         <th>Angriff</th>
-        <td>{{this.game.enemy.stats.attack}}</td>
+        <td>{{this.game.enemy.stats.attack | number : '1.1-1'}}</td>
       </tr>
       <tr>
         <th>Leben</th>
-        <td>{{this.game.enemy.stats.life}}</td>
+        <td>{{this.game.enemy.stats.life | number : '1.1-1'}}</td>
       </tr>
       <tr>
         <th>Schild</th>
-        <td>{{this.game.enemy.stats.shield}}</td>
+        <td>{{this.game.enemy.stats.shield | number : '1.1-1'}}</td>
       </tr>
     </table>
     <div class="interaction">

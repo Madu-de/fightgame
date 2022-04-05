@@ -1,15 +1,15 @@
 <div class="anzeige-top">
   <div class="hp anzeige" >
     <img src="./assets/anzeige/leben.svg" alt="leben">
-    <p>{{user.health}}</p>
+    <p>{{user.health | number : '1.1-1'}}</p>
   </div>
   <div class="damage anzeige">
     <img src="./assets/anzeige/damage.svg" alt="damage">
-    <p>{{user.attack}}</p>
+    <p>{{user.attack | number : '1.1-1'}}</p>
   </div>
   <div class="shield anzeige">
     <img src="./assets/anzeige/shield.svg" alt="shield">
-    <p>{{user.shield}}</p>
+    <p>{{user.shield | number : '1.1-1'}}</p>
   </div>
   <div class="gold anzeige">
     <img src="./assets/anzeige/gold.svg" alt="gold">

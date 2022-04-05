@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { GameService } from '../../services/game.service';
 import { UserService } from 'src/app/services/user.service';
 import { Gender } from '../../enums/gender.enum';
@@ -60,7 +60,8 @@ export class CreateComponent implements OnInit {
     this.user.gold = Math.floor(Math.random() * 5 + 1);
     this.user.lvl = 1;
     this.user.maxXp = 50;
+    this.game.enemy.setStats(this.user.lvl);
     this.game.saveInLocalStorage(this.user, this.game.enemy);
-    location.reload();
+    location.href = '/';
   }
 }

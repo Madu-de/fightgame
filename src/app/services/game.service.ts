@@ -11,17 +11,28 @@ export class GameService {
 
   public card = document.getElementsByClassName('card-play');
 
+  private actionIsRunning: boolean = false;
+
   constructor(private router: Router, public user: UserService) { }
+
+  public allMonsters: Monster[] = [
+    new Monster('Igor', 'Pferd-Herrscher', { src: './assets/card-images/igor.png', alt: 'Igor' }, MonsterSpezies.herrscher, { content: 'Gehen', show: true, click: () => { this.go() } }, { content: 'Kämpfen', show: true, click: () => { this.fight() } }, 50),
+    new Monster('Gerian', 'Troll', { src: './assets/card-images/gerian.png', alt: 'Gerian' }, MonsterSpezies.troll, { content: 'Gehen', show: true, click: () => { this.go() } }, { content: 'Kämpfen', show: true, click: () => { this.fight() } }, 20),
+    new Monster('Lina', 'Drachen-Hexe', { src: './assets/card-images/lina.jpg', alt: 'Lina' }, MonsterSpezies.hexe, { content: 'Gehen', show: true, click: () => { this.go() } }, { content: 'Kämpfen', show: true, click: () => { this.fight() } }, 40),
+    new Monster('Lilli', 'Drachen-Assasinin', { src: './assets/card-images/lilli.jpg', alt: 'lilli' }, MonsterSpezies.assasine, { content: 'Gehen', show: true, click: () => { this.go() } }, { content: 'Kämpfen', show: true, click: () => { this.fight() } }, 60)
+  ]
+
+  public allBosses = [
+
+  ]
 
   public enemy = new Monster(
     'Henrik',
     'Tutorial-Goblin',
     { src: './assets/card-images/tutorial-goblin.jpg', alt: 'Henrik' },
     MonsterSpezies.goblin,
-    { attack: 0.5, life: 1, shield: 0 },
     { content: '', show: false, click: () => { } },
-    { content: 'Kämpfen', show: true, click: () => { this.fight(); } },
-    10);
+    { content: 'Kämpfen', show: true, click: () => { this.fight(); } }, 10);
 
   public checkData(withData: string, withoutData: string) { // Check the localstorage of the client
     let data = this.getDataFromLocalStorage();
@@ -32,33 +43,67 @@ export class GameService {
     }
   }
 
-  public fight() {
-    this.enemy.stats.life -= this.user.attack;
-    this.user.health -= this.enemy.stats.attack;
-    if (this.user.health <= 0) {
-      alert('Du bist tot.');
-      localStorage.clear();
-      location.reload();
-      return;
+  public fight() { // TODO shield
+    if (!this.actionIsRunning) {
+      this.actionIsRunning = true;
+      this.enemy.stats.life -= this.user.attack; // attack the enemy
+      if (this.enemy.stats.life < 0) {
+        this.enemy.stats.life = 0;
+      }
+      this.card[0].classList.add('shake');
+      this.card[0].classList.remove('fadeInObject'); // to prevent design bugs
+      setTimeout(() => { // after shake animation
+        this.card[0].classList.remove('shake');
+        if (this.enemy.stats.life <= 0) { // check if the enemy is dead
+          this.user.addXp(this.enemy.xp);
+          this.newCard();
+          this.actionIsRunning = false;
+          return;
+        }
+        this.user.health -= this.enemy.stats.attack; // attack the user
+        this.saveInLocalStorage(this.user, this.enemy);
+        this.actionIsRunning = false;
+        if (this.user.health <= 0) { // check if the user is dead
+          alert('Du bist tot.');
+          localStorage.clear();
+          location.reload();
+          return;
+        }
+      }, 400);
     }
-    if (this.enemy.stats.life <= 0) { // check if the enemy is dead
-      this.user.addXp(this.enemy.xp); // TODO give xp and more;
-      this.newCard();
-    }
-    this.saveInLocalStorage(this.user, this.enemy);
   }
 
   public go() {
-    // TODO enemy attack you
-    this.newCard();
+    if (!this.actionIsRunning) {
+      this.actionIsRunning = true;
+      let random = Math.floor(Math.random() * 5) + 1;
+      if (random == 3) { // 20% chance
+        this.card[0].classList.add('fallUp');
+        setTimeout(() => {
+          this.card[0].classList.add('shake');
+          this.card[0].classList.remove('fallUp');
+          setTimeout(() => {
+            this.user.health -= this.enemy.stats.attack; // attack the user
+            if (this.user.health <= 0) { // check if the user is dead
+              alert('Du bist tot.');
+              localStorage.clear();
+              location.reload();
+              return;
+            }
+          }, 500);
+        }, 850);
+      } else {
+        this.newCard();
+      }
+      this.actionIsRunning = false;
+    }
   }
 
   public newCard() {
-    this.enemy.buttonLeft.click = () => { };
-    this.enemy.buttonRight.click = () => { };
     this.card[0].classList.add('fallDown');
     setTimeout(() => {
       this.card[0].classList.add('none');
+      this.card[0].classList.add('fadeInObject');
       this.card[0].classList.remove('fallDown');
       setTimeout(() => {
         this.enemy = this.getRandomMonster();
@@ -135,7 +180,10 @@ export class GameService {
     }
   }
 
-  public getRandomMonster() {
-    return new Monster('Phillip', 'Goblin', { src: 'wild', alt: 'wild' }, MonsterSpezies.goblin, { attack: 5, life: 5, shield: 2 }, { content: 'Gehen', show: true, click: () => { this.go(); } }, { content: 'Kämpfen', show: true, click: () => { this.fight(); } }, 20);
+  public getRandomMonster(): Monster {
+    let random = Math.floor(Math.random() * this.allMonsters.length);
+    let monster: Monster = this.allMonsters[random];
+    monster.setStats(this.user.lvl);
+    return monster;
   }
 }
