@@ -11,6 +11,8 @@ import { GameService } from './services/game.service';
 import { UserService } from './services/user.service';
 import { LevelAnzeigeComponent } from './features/layout/level-anzeige/level-anzeige.component';
 import { DevToolsComponent } from './features/devTools/devTools.component';
+import { InventorySlotComponent } from './features/inventorySlot/slot.component';
+import { InventoryComponent } from './features/inventory/inventory.component';
 
 @NgModule({
   declarations: [
@@ -19,7 +21,9 @@ import { DevToolsComponent } from './features/devTools/devTools.component';
     AnzeigeComponent,
     LevelAnzeigeComponent,
     PlayComponent,
-    DevToolsComponent
+    DevToolsComponent,
+    InventorySlotComponent,
+    InventoryComponent
   ],
   imports: [
     CommonModule,

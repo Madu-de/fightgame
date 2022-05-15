@@ -1,5 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
+import { Boss } from '../classes/boss';
+import { Item } from '../classes/item';
 import { Monster } from '../classes/monster';
 import { MonsterSpezies } from '../enums/monsterSpezies.enum';
 import { UserService } from './user.service';
@@ -16,21 +18,31 @@ export class GameService {
   constructor(private router: Router, public user: UserService) { }
 
   public allMonsters: Monster[] = [
-    new Monster('Igor', 'Pferd-Herrscher', { src: './assets/card-images/igor.png', alt: 'Igor' }, MonsterSpezies.herrscher, { content: 'Gehen', show: true, click: () => { this.go() } }, { content: 'Kämpfen', show: true, click: () => { this.fight() } }, 50),
-    new Monster('Gerian', 'Troll', { src: './assets/card-images/gerian.png', alt: 'Gerian' }, MonsterSpezies.troll, { content: 'Gehen', show: true, click: () => { this.go() } }, { content: 'Kämpfen', show: true, click: () => { this.fight() } }, 20),
-    new Monster('Lina', 'Drachen-Hexe', { src: './assets/card-images/lina.jpg', alt: 'Lina' }, MonsterSpezies.hexe, { content: 'Gehen', show: true, click: () => { this.go() } }, { content: 'Kämpfen', show: true, click: () => { this.fight() } }, 40),
-    new Monster('Lilli', 'Drachen-Assasinin', { src: './assets/card-images/lilli.jpg', alt: 'lilli' }, MonsterSpezies.assasine, { content: 'Gehen', show: true, click: () => { this.go() } }, { content: 'Kämpfen', show: true, click: () => { this.fight() } }, 60)
+    new Monster('Igor', 'Pferd-Herrscher', { src: 'igor.png', alt: 'Igor' }, MonsterSpezies.Herrscher, { content: 'Gehen', show: true, click: () => { this.go() } }, { content: 'Kämpfen', show: true, click: () => { this.fight() } }, 50),
+    new Monster('Gerian', 'Troll', { src: 'gerian.png', alt: 'Gerian' }, MonsterSpezies.Troll, { content: 'Gehen', show: true, click: () => { this.go() } }, { content: 'Kämpfen', show: true, click: () => { this.fight() } }, 20),
+    new Monster('Lina', 'Drachen-Hexe', { src: 'lina.jpg', alt: 'Lina' }, MonsterSpezies.Hexe, { content: 'Gehen', show: true, click: () => { this.go() } }, { content: 'Kämpfen', show: true, click: () => { this.fight() } }, 40),
+    new Monster('Lilli', 'Drachen-Assasinin', { src: 'lilli.jpg', alt: 'Lilli' }, MonsterSpezies.Assasine, { content: 'Gehen', show: true, click: () => { this.go() } }, { content: 'Kämpfen', show: true, click: () => { this.fight() } }, 60),
+    new Monster('Max', 'Troll', { src: 'max.png', alt: 'Max' }, MonsterSpezies.Troll, { content: 'Gehen', show: true, click: () => { this.go() } }, { content: 'Kämpfen', show: true, click: () => this.fight() }, 20),
+    new Monster('Jannik', 'Zombie', { src: 'jannik.jpg', alt: 'Jannik' }, MonsterSpezies.Zombie, { content: 'Gehen', show: true, click: () => { this.go() } }, { content: 'Kämpfen', show: true, click: () => { this.fight() } }, 30),
+    new Monster('Julius', 'Ork', { src: 'julius.jpg', alt: 'Julius' }, MonsterSpezies.Ork, { content: 'Gehen', show: true, click: () => { this.go() } }, { content: 'Kämpfen', show: true, click: () => { this.fight() } }, 10)
   ]
 
-  public allBosses = [
+  public allBosses: Boss[] = [
+    new Boss('Peter', 'Affen-Herrscher', { src: './assets/card-image/', alt: 'Peter' }, MonsterSpezies.Riesenaffe, { content: 'Gehen', show: true, click: () => { this.go() } }, { content: 'Kämpfen', show: true, click: () => { this.fight() } }, 500),
+    new Boss('Daniel', 'Drache', { src: 'daniel.png', alt: 'Daniel' }, MonsterSpezies.Drache, { content: 'Gehen', show: true, click: () => { this.go() } }, { content: 'Kämpfen', show: true, click: () => { this.fight() } }, 1000),
+    //new Boss('Momme', ''),
+    //new Boss('Felipe')
+  ]
+
+  public allItems: Item[] = [
 
   ]
 
-  public enemy = new Monster(
+  public enemy = new Monster( // Tutorial Goblin
     'Henrik',
     'Tutorial-Goblin',
-    { src: './assets/card-images/tutorial-goblin.jpg', alt: 'Henrik' },
-    MonsterSpezies.goblin,
+    { src: 'tutorial-goblin.jpg', alt: 'Henrik' },
+    MonsterSpezies.Goblin,
     { content: '', show: false, click: () => { } },
     { content: 'Kämpfen', show: true, click: () => { this.fight(); } }, 10);
 
@@ -47,9 +59,21 @@ export class GameService {
     if (!this.actionIsRunning) {
       this.actionIsRunning = true;
       this.card[0].classList.remove('shake');
-      this.enemy.stats.life -= this.user.attack; // attack the enemy
+      // attack the enemy
+      if (this.enemy.stats.shield > 0) {  // if the enemy have shield
+        let attack = this.user.attack - this.enemy.stats.shield; // save the attack
+        this.enemy.stats.shield -= this.user.attack; // attack the shield
+        if (attack > 0) { // if attack is over 0 remove the rest from the life
+          this.enemy.stats.life -= attack;
+        }
+      } else { // if the enemy doesn't have shield
+        this.enemy.stats.life -= this.user.attack;
+      }
       if (this.enemy.stats.life < 0) {
         this.enemy.stats.life = 0;
+      }
+      if (this.enemy.stats.shield < 0) {
+        this.enemy.stats.shield = 0;
       }
       this.card[0].classList.add('shake');
       this.card[0].classList.remove('fadeInObject'); // to prevent design bugs
@@ -61,15 +85,22 @@ export class GameService {
           this.actionIsRunning = false;
           return;
         }
-        this.user.health -= this.enemy.stats.attack; // attack the user
+        // attack the user
+        if (this.user.shield > 0) {  // if the user have shield
+          let attack = this.enemy.stats.attack - this.user.shield; // save the attack
+          this.user.shield -= this.enemy.stats.attack; // attack the shield
+          if (attack > 0) { // if attack is over 0 remove the rest from the life
+            this.user.health -= attack;
+          }
+        } else { // if the user doesn't have shield
+          this.user.health -= this.enemy.stats.attack;
+        }
+        if (this.user.shield < 0) {
+          this.user.shield = 0;
+        }
         this.saveInLocalStorage(this.user, this.enemy);
         this.actionIsRunning = false;
-        if (this.user.health <= 0) { // check if the user is dead
-          alert('Du bist tot.');
-          localStorage.clear();
-          location.reload();
-          return;
-        }
+        this.checkIfTheUserIsDead();
       }, 400);
     }
   }
@@ -77,7 +108,7 @@ export class GameService {
   public go() {
     if (!this.actionIsRunning) {
       this.actionIsRunning = true;
-      this.card[0].classList.remove('shake');
+      this.card[0].classList.remove('shake'); // to prevent design bugs
       let random = Math.floor(Math.random() * 5) + 1;
       if (random == 3) { // 20% chance
         this.card[0].classList.add('fallUp');
@@ -86,12 +117,7 @@ export class GameService {
           this.card[0].classList.remove('fallUp');
           setTimeout(() => {
             this.user.health -= this.enemy.stats.attack; // attack the user
-            if (this.user.health <= 0) { // check if the user is dead
-              alert('Du bist tot.');
-              localStorage.clear();
-              location.reload();
-              return;
-            }
+            this.checkIfTheUserIsDead();
             this.actionIsRunning = false;
           }, 500);
         }, 850);
@@ -99,6 +125,14 @@ export class GameService {
         this.actionIsRunning = false;
         this.newCard();
       }
+    }
+  }
+
+  public checkIfTheUserIsDead() {
+    if (this.user.health <= 0) {
+      alert('Du bist tot.');
+      localStorage.clear();
+      location.reload();
     }
   }
 

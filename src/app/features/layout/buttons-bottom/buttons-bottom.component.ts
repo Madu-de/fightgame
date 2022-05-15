@@ -14,8 +14,4 @@ export class ButtonsBottomComponent implements OnInit {
   ngOnInit() {
   }
 
-  public myClickHandler(): void {
-
-  }
-
 }

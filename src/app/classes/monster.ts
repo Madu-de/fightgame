@@ -11,7 +11,7 @@ export class Monster {
         src: '',
         alt: ''
     };
-    public spezies: MonsterSpezies = MonsterSpezies.goblin;
+    public spezies: MonsterSpezies = MonsterSpezies.Goblin;
     public stats: MonsterStats = {
         attack: 0,
         life: 0,
@@ -32,7 +32,7 @@ export class Monster {
     constructor(name: string, description: string, image: MonsterImage, spezies: MonsterSpezies, buttonLeft: CardButton, buttonRight: CardButton, xp: number) {
         this.name = name;
         this.description = description;
-        this.image = image;
+        this.image = { src: './assets/card-images/' + image.src, alt: image.alt };
         this.spezies = spezies;
         this.buttonLeft = buttonLeft;
         this.buttonRight = buttonRight;
@@ -41,20 +41,26 @@ export class Monster {
 
     public setStats(level: number) {
         switch (this.spezies) {
-            case MonsterSpezies.troll:
+            case MonsterSpezies.Troll:
                 this.setupStats({ max: 15, min: 10 }, { max: 20, min: 15 }, { max: 15, min: 5 }, level);
                 break;
-            case MonsterSpezies.goblin:
+            case MonsterSpezies.Goblin:
                 this.setupStats({ max: 20, min: 15 }, { max: 25, min: 15 }, { max: 20, min: 10 }, level);
                 break;
-            case MonsterSpezies.herrscher:
+            case MonsterSpezies.Herrscher:
                 this.setupStats({ max: 50, min: 30 }, { max: 50, min: 20 }, { max: 30, min: 20 }, level);
                 break;
-            case MonsterSpezies.hexe:
+            case MonsterSpezies.Hexe:
                 this.setupStats({ max: 45, min: 20 }, { max: 60, min: 40 }, { max: 10, min: 5 }, level);
                 break;
-            case MonsterSpezies.assasine:
+            case MonsterSpezies.Assasine:
                 this.setupStats({ max: 50, min: 30 }, { max: 25, min: 20 }, { max: 5, min: 2 }, level);
+                break;
+            case MonsterSpezies.Ork:
+                this.setupStats({ max: 50, min: 15 }, { max: 45, min: 15 }, { max: 20, min: 10 }, level);
+                break;
+            case MonsterSpezies.Drache:
+                this.setupStats({ max: 60, min: 20 }, { max: 65, min: 25 }, { max: 10, min: 20 }, level);
                 break;
             default:
                 this.setupStats({ max: 5, min: 15 }, { max: 20, min: 10 }, { max: 20, min: 5 }, level);
