@@ -13,6 +13,7 @@ export class PlayComponent implements OnInit {
   ngOnInit() {
     this.game.checkData('play', '');
     this.game.saveDataFromLocalStorage();
+    console.log(this.game.getAllItemsWithTheSameCategory('sword'));
   }
 
 }

@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
 import { Boss } from '../classes/boss';
+import { Fee } from '../classes/fee';
 import { Item } from '../classes/item';
 import { Monster } from '../classes/monster';
 import { MonsterSpezies } from '../enums/monsterSpezies.enum';
@@ -22,21 +23,31 @@ export class GameService {
     new Monster('Gerian', 'Troll', { src: 'gerian.png', alt: 'Gerian' }, MonsterSpezies.Troll, { content: 'Gehen', show: true, click: () => { this.go() } }, { content: 'Kämpfen', show: true, click: () => { this.fight() } }, 20),
     new Monster('Lina', 'Drachen-Hexe', { src: 'lina.jpg', alt: 'Lina' }, MonsterSpezies.Hexe, { content: 'Gehen', show: true, click: () => { this.go() } }, { content: 'Kämpfen', show: true, click: () => { this.fight() } }, 40),
     new Monster('Lilli', 'Drachen-Assasinin', { src: 'lilli.jpg', alt: 'Lilli' }, MonsterSpezies.Assasine, { content: 'Gehen', show: true, click: () => { this.go() } }, { content: 'Kämpfen', show: true, click: () => { this.fight() } }, 60),
-    new Monster('Max', 'Troll', { src: 'max.png', alt: 'Max' }, MonsterSpezies.Troll, { content: 'Gehen', show: true, click: () => { this.go() } }, { content: 'Kämpfen', show: true, click: () => this.fight() }, 20),
+    new Monster('Max', 'Troll', { src: 'max.jpg', alt: 'Max' }, MonsterSpezies.Troll, { content: 'Gehen', show: true, click: () => { this.go() } }, { content: 'Kämpfen', show: true, click: () => this.fight() }, 20),
     new Monster('Jannik', 'Zombie', { src: 'jannik.jpg', alt: 'Jannik' }, MonsterSpezies.Zombie, { content: 'Gehen', show: true, click: () => { this.go() } }, { content: 'Kämpfen', show: true, click: () => { this.fight() } }, 30),
-    new Monster('Julius', 'Ork', { src: 'julius.jpg', alt: 'Julius' }, MonsterSpezies.Ork, { content: 'Gehen', show: true, click: () => { this.go() } }, { content: 'Kämpfen', show: true, click: () => { this.fight() } }, 10)
+    new Monster('Julius', 'Ork', { src: 'julius.jpg', alt: 'Julius' }, MonsterSpezies.Ork, { content: 'Gehen', show: true, click: () => { this.go() } }, { content: 'Kämpfen', show: true, click: () => { this.fight() } }, 30),
+    new Monster('Leif', 'Zombie', { src: 'leif.jpg', alt: 'Leif' }, MonsterSpezies.Zombie, { content: 'Gehen', show: true, click: () => { this.go() } }, { content: 'Kämpfen', show: true, click: () => { this.fight() } }, 20),
+    new Monster('Jonah', 'Dementor', { src: 'jonah.jpg', alt: 'Jonah' }, MonsterSpezies.Dementor, { content: 'Gehen', show: true, click: () => { this.go() } }, { content: 'Kämpfen', show: true, click: () => { this.fight() } }, 30)
   ]
 
   public allBosses: Boss[] = [
-    new Boss('Peter', 'Affen-Herrscher', { src: './assets/card-image/', alt: 'Peter' }, MonsterSpezies.Riesenaffe, { content: 'Gehen', show: true, click: () => { this.go() } }, { content: 'Kämpfen', show: true, click: () => { this.fight() } }, 500),
-    new Boss('Daniel', 'Drache', { src: 'daniel.png', alt: 'Daniel' }, MonsterSpezies.Drache, { content: 'Gehen', show: true, click: () => { this.go() } }, { content: 'Kämpfen', show: true, click: () => { this.fight() } }, 1000),
+    new Boss(0, 'Peter', 'Affen-Herrscher', { src: './assets/card-image/', alt: 'Peter' }, MonsterSpezies.Riesenaffe, { content: 'Gehen', show: true, click: () => { this.go() } }, { content: 'Kämpfen', show: true, click: () => { this.fight() } }, 500),
+    new Boss(1, 'Daniel', 'Drache', { src: 'daniel.png', alt: 'Daniel' }, MonsterSpezies.Drache, { content: 'Gehen', show: true, click: () => { this.go() } }, { content: 'Kämpfen', show: true, click: () => { this.fight() } }, 1000),
+    //new Boss('Lukas')
     //new Boss('Momme', ''),
     //new Boss('Felipe')
   ]
 
   public allItems: Item[] = [
-
+    new Item('position_heal', 'Heilungstrank', '', 0, 5, 0, 10, 1, { src: 'position_heal.png', alt: 'Trank' }),
+    new Item('sword_wood', 'Holzschwert', '', 2, 0, 0, 20, 5, { src: 'sword_wood.png', alt: 'Schwert' }),
+    new Item('armor_lether', 'Lederrüstung', '', 0, 0, 5, 20, 5, { src: 'armor_lether.png', alt: 'Rüstung' }),
+    new Item('sword_eisen', 'Eisenschwert', '', 5, 0, 0, 50, 10, { src: 'sword_eisen.png', alt: 'Eisenschwert' }),
+    new Item('position_strength', 'Stärketrank', '', 10, 0, 0, 80, 1, { src: 'position_strength.png', alt: 'Stärketrank' }),
+    new Item('sword_gold', 'Goldschwert', '', 15, 0, 0, 100, 30, { src: 'sword_gold.png', alt: 'Goldschwert' })
   ]
+
+  public fee: Fee = new Fee();
 
   public enemy = new Monster( // Tutorial Goblin
     'Henrik',
@@ -129,7 +140,7 @@ export class GameService {
   }
 
   public checkIfTheUserIsDead() {
-    if (this.user.health <= 0) {
+    if (this.user.health <= 0 && this.user.shield <= 0) {
       alert('Du bist tot.');
       localStorage.clear();
       location.reload();
@@ -202,7 +213,7 @@ export class GameService {
       let data = {
         user: _user,
         enemy: _enemy,
-        settings: 'settings'
+        settings: 'settings' //TODO Save Settings
       }
       localStorage.setItem('fg:data', JSON.stringify(data));
 
@@ -223,5 +234,46 @@ export class GameService {
     let monster: Monster = this.allMonsters[random];
     monster.setStats(this.user.lvl);
     return monster;
+  }
+
+  public getItemByIdName(idName: string): Item | undefined {
+    for (let i = 0; i < this.allItems.length; i++) {
+      const element = this.allItems[i];
+      if (element.idName === idName) {
+        return element;
+      }
+    }
+    return undefined;
+  }
+
+  public getBossByName(name: string): Boss | undefined {
+    for (let i = 0; i < this.allBosses.length; i++) {
+      const element = this.allBosses[i];
+      if (element.name === name) {
+        return element;
+      }
+    }
+    return undefined;
+  }
+
+  public getBossById(id: number): Boss | undefined {
+    for (let i = 0; i < this.allBosses.length; i++) {
+      const element = this.allBosses[i];
+      if (element.id === id) {
+        return element;
+      }
+    }
+    return undefined;
+  }
+
+  public getAllItemsWithTheSameCategory(category: string): Item[] | undefined {
+    let items: Item[] | undefined = [];
+    for (let i = 0; i < this.allItems.length; i++) {
+      const element = this.allItems[i];
+      if (element.idName?.startsWith(category)) {
+        items?.push(element);
+      }
+    }
+    return items;
   }
 }

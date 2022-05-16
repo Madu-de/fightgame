@@ -8,7 +8,7 @@ export class UserService {
 
   constructor() { }
   public username: string = '';
-  public gender: Gender = Gender.men; // men or women
+  public gender: Gender = Gender.man; // men or women
   public health: number = 0;
   public attack: number = 0;
   public shield: number = 0;

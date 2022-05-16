@@ -12,5 +12,6 @@ export enum MonsterSpezies {
     Assasine = 'Assasine',
     Herrscher = 'Herrscher',
     Troll = 'Troll',
-    Zauberer = 'Zauberer'
+    Zauberer = 'Zauberer',
+    Dementor = 'Dementor'
 }

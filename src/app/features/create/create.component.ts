@@ -13,7 +13,7 @@ export class CreateComponent implements OnInit {
   private nameInput: any = document.getElementsByClassName('createNameInput');
   private button: any = document.getElementsByClassName('createSubmitButton');
   private name: any = document.getElementsByClassName('name');
-  private men: any = document.getElementsByClassName('men');
+  private man: any = document.getElementsByClassName('man');
   private women: any = document.getElementsByClassName('women');
 
   constructor(private game: GameService, private user: UserService) { }
@@ -31,7 +31,7 @@ export class CreateComponent implements OnInit {
     this.user.username = name;
     setTimeout(() => {
       this.name[0].classList.add('none');
-      this.men[0].classList.remove('none');
+      this.man[0].classList.remove('none');
       this.women[0].classList.remove('none');
     }, 300);
   }
@@ -46,8 +46,8 @@ export class CreateComponent implements OnInit {
   }
 
   public saveGender(gender: string) {
-    if (gender == 'men') {
-      this.user.gender = Gender.men;
+    if (gender == 'man') {
+      this.user.gender = Gender.man;
     } else if (gender == 'women') {
       this.user.gender = Gender.women;
     }

@@ -1,13 +1,13 @@
 import { MonsterSpezies } from '../enums/monsterSpezies.enum';
 import { CardButton } from '../interfaces/cardButton';
-import { MonsterImage } from '../interfaces/monsterImage';
+import { Image } from '../interfaces/image';
 import { MonsterStats } from '../interfaces/monsterStats';
 import { MinMax } from '../interfaces/minMax';
 
 export class Monster {
     public name: string = '';
     public description: string = '';
-    public image: MonsterImage = {
+    public image: Image = {
         src: '',
         alt: ''
     };
@@ -29,7 +29,7 @@ export class Monster {
     };
     public xp: number = 0;
 
-    constructor(name: string, description: string, image: MonsterImage, spezies: MonsterSpezies, buttonLeft: CardButton, buttonRight: CardButton, xp: number) {
+    constructor(name: string, description: string, image: Image, spezies: MonsterSpezies, buttonLeft: CardButton, buttonRight: CardButton, xp: number) {
         this.name = name;
         this.description = description;
         this.image = { src: './assets/card-images/' + image.src, alt: image.alt };
@@ -61,6 +61,12 @@ export class Monster {
                 break;
             case MonsterSpezies.Drache:
                 this.setupStats({ max: 60, min: 20 }, { max: 65, min: 25 }, { max: 10, min: 20 }, level);
+                break;
+            case MonsterSpezies.Dementor:
+                this.setupStats({ max: 30, min: 10 }, { max: 25, min: 20 }, { max: 5, min: 0 }, level);
+                break;
+            case MonsterSpezies.Zombie:
+                this.setupStats({ max: 20, min: 10 }, { max: 30, min: 20 }, { max: 5, min: 0 }, level);
                 break;
             default:
                 this.setupStats({ max: 5, min: 15 }, { max: 20, min: 10 }, { max: 20, min: 5 }, level);

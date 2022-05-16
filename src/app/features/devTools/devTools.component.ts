@@ -56,7 +56,7 @@ export class DevToolsComponent implements OnInit {
     if (input == '') {
       input = '0';
     }
-    this.user.health = parseInt(input);
+    this.user.health = parseFloat(input);
     this.game.saveInLocalStorage(this.user, this.game.enemy);
   }
 
@@ -68,7 +68,7 @@ export class DevToolsComponent implements OnInit {
     if (input == '') {
       input = '0';
     }
-    this.user.attack = parseInt(input);
+    this.user.attack = parseFloat(input);
     this.game.saveInLocalStorage(this.user, this.game.enemy);
   }
 
@@ -80,7 +80,7 @@ export class DevToolsComponent implements OnInit {
     if (input == '') {
       input = '0';
     }
-    this.user.shield = parseInt(input);
+    this.user.shield = parseFloat(input);
     this.game.saveInLocalStorage(this.user, this.game.enemy);
   }
 
