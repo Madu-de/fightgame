@@ -1,4 +1,5 @@
 import { Injectable } from '@angular/core';
+import { Item } from '../classes/item';
 import { Gender } from '../enums/gender.enum';
 
 @Injectable({
