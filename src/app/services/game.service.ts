@@ -1,9 +1,12 @@
 import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
+import { Armor } from '../classes/armor';
 import { Boss } from '../classes/boss';
 import { Fee } from '../classes/fee';
 import { Item } from '../classes/item';
 import { Monster } from '../classes/monster';
+import { Potion } from '../classes/potion';
+import { Sword } from '../classes/sword';
 import { MonsterSpezies } from '../enums/monsterSpezies.enum';
 import { UserService } from './user.service';
 
@@ -39,23 +42,23 @@ export class GameService {
   ]
 
   public allItems: Item[] = [
-    new Item('position_heal', 'Heilungstrank', '', 0, 5, 0, 10, 1, { src: 'position_heal.png', alt: 'Trank' }),
-    new Item('sword_wood', 'Holzschwert', '', 2, 0, 0, 20, 5, { src: 'sword_wood.png', alt: 'Schwert' }),
-    new Item('armor_lether', 'Lederrüstung', '', 0, 0, 5, 20, 5, { src: 'armor_lether.png', alt: 'Rüstung' }),
-    new Item('sword_eisen', 'Eisenschwert', '', 5, 0, 0, 50, 10, { src: 'sword_eisen.png', alt: 'Eisenschwert' }),
-    new Item('position_strength', 'Stärketrank', '', 10, 0, 0, 80, 1, { src: 'position_strength.png', alt: 'Stärketrank' }),
-    new Item('sword_gold', 'Goldschwert', '', 15, 0, 0, 100, 30, { src: 'sword_gold.png', alt: 'Goldschwert' })
+    new Potion('potion_heal', 'Heilungstrank', '', 0, 5, 0, 10, { src: 'position_heal.png', alt: 'Trank' }, 0),
+    new Sword('sword_wood', 'Holzschwert', '', 2, 0, 0, 20, { src: 'sword_wood.png', alt: 'Schwert' }, 5),
+    new Armor('armor_lether', 'Lederrüstung', '', 0, 0, 5, 20, { src: 'armor_lether.png', alt: 'Rüstung' }, 5),
+    new Sword('sword_eisen', 'Eisenschwert', '', 5, 0, 0, 50, { src: 'sword_eisen.png', alt: 'Eisenschwert' }, 20),
+    new Potion('potion_strength', 'Stärketrank', '', 10, 0, 0, 80, { src: 'position_strength.png', alt: 'Stärketrank' }, 5),
+    new Sword('sword_gold', 'Goldschwert', '', 15, 0, 0, 100, { src: 'sword_gold.png', alt: 'Goldschwert' }, 15)
   ]
 
   public fee: Fee = new Fee();
 
-  public enemy = new Monster( // Tutorial Goblin
-    'Henrik',
-    'Tutorial-Goblin',
-    { src: 'tutorial-goblin.jpg', alt: 'Henrik' },
-    MonsterSpezies.Goblin,
-    { content: '', show: false, click: () => { } },
-    { content: 'Kämpfen', show: true, click: () => { this.fight(); } }, 10);
+  public inventory: any[] = [
+    this.getItemByIdName('sword_wood'),
+    this.getItemByIdName('armor_lether'),
+
+  ]
+
+  public enemy = new Monster('Henrik', 'Tutorial-Goblin', { src: 'tutorial-goblin.jpg', alt: 'Henrik' }, MonsterSpezies.Goblin, { content: '', show: false, click: () => { } }, { content: 'Kämpfen', show: true, click: () => { this.fight(); } }, 10);
 
   public checkData(withData: string, withoutData: string) { // Check the localstorage of the client
     let data = this.getDataFromLocalStorage();
@@ -236,7 +239,7 @@ export class GameService {
     return monster;
   }
 
-  public getItemByIdName(idName: string): Item | undefined {
+  public getItemByIdName(idName: string): any {
     for (let i = 0; i < this.allItems.length; i++) {
       const element = this.allItems[i];
       if (element.idName === idName) {

@@ -13,6 +13,7 @@ export class ShopComponent implements OnInit {
 
   ngOnInit() {
     this.game.checkData('shop', '');
+    this.game.saveDataFromLocalStorage();
   }
 
 }

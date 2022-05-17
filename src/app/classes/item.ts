@@ -16,10 +16,9 @@ export class Item {
     public health: number | undefined;
     public shield: number | undefined;
     public price: number | undefined;
-    public uses: number | undefined;
     public image: Image;
 
-    constructor(idName: string, name: string, description: string, attack: number, health: number, shield: number, price: number, uses: number, image: Image) {
+    constructor(idName: string, name: string, description: string, attack: number, health: number, shield: number, price: number, image: Image) {
         this.idName = idName;
         this.name = name;
         this.description = description
@@ -27,7 +26,6 @@ export class Item {
         this.health = health;
         this.shield = shield;
         this.price = price;
-        this.uses = uses;
-        this.image = { src: './assets/item-images' + image.src, alt: image.alt };
+        this.image = { src: './assets/item-images/' + image.src, alt: image.alt };
     }
 }

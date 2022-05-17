@@ -13,6 +13,7 @@ export class SettingsComponent implements OnInit {
 
   ngOnInit() {
     this.game.checkData('settings', '');
+    this.game.saveDataFromLocalStorage();
   }
 
 }

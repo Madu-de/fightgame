@@ -3,5 +3,21 @@
     width: 50px;
     background-color: rgba(153, 153, 153, 0.801);
     display: inline-flex;
-    border: black solid;
+    border: black solid 2px;
+    padding: 2px;
+}
+
+
+@media screen and (min-width: 375px) {
+  .slot {
+    height: 60px;
+    width: 60px;
+  }
+}
+
+@media screen and (min-width: 500px) {
+  .slot {
+    height: 70px;
+    width: 70px;
+  }
 }

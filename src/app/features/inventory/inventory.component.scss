@@ -1,4 +1,56 @@
+$width: 275px;
+
 .inventory {
-    height: 100vh;
-    width: 100%;
+  height: 100vh;
+  width: 100%;
+}
+
+.charakterScreen {
+  display: block;
+  position: relative;
+  top: 50px;
+  margin: 0 auto;
+  width: $width;
+  height: 300px;
+
+  background-color: pink;
+  border: 1px solid black;
+
+}
+
+#hotbar {
+  position: relative;
+  top: 180px;
+  display: grid;
+  text-align: center;
+  margin: 0 auto;
+  width: $width;
+
+  .hotbarSlot {
+    grid-row: 1;
+  }
+}
+
+#inv {
+  position: relative;
+  top: 100px;
+  display: grid;
+  text-align: center;
+  margin: 0 auto;
+  width: $width;
+
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+
+  app-inventoryslot {
+    margin: 5px;
+  }
+}
+
+app-inventoryslot {
+  img {
+    object-fit: cover;
+  }
 }

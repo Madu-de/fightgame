@@ -1,3 +1,30 @@
 <div class="inventory">
-    <app-inventoryslot></app-inventoryslot>
+  <!--<div class="charakterScreen">Charakter</div>-->
+  <!--Inventory Hotbar-->
+  <div id="inventory">
+    <div id="hotbar">
+      <app-inventoryslot class="hotbarSlot slot" id="sword_slot"><img [src]="this.game.inventory[0]?.image.src" [alt]="this.game.inventory[0]?.image.alt" *ngIf="this.game.inventory[0]?.image != null"><img></app-inventoryslot>
+      <app-inventoryslot class="hotbarSlot slot" id="armor_slot"><img [src]="this.game.inventory[1]?.image.src" [alt]="this.game.inventory[1]?.image.alt" *ngIf="this.game.inventory[1]?.image != null"><img></app-inventoryslot>
+    </div>
+
+    <div id="inv">
+      <div id="row-1">
+        <app-inventoryslot id="2" class="slot"><img [src]="this.game.inventory[2]?.image.src" [alt]="this.game.inventory[2]?.image.alt" *ngIf="this.game.inventory[2]?.image != null"><img></app-inventoryslot>
+        <app-inventoryslot id="3" class="slot"><img [src]="this.game.inventory[3]?.image.src" [alt]="this.game.inventory[3]?.image.alt" *ngIf="this.game.inventory[3]?.image != null"><img></app-inventoryslot>
+        <app-inventoryslot id="4" class="slot"><img [src]="this.game.inventory[4]?.image.src" [alt]="this.game.inventory[4]?.image.alt" *ngIf="this.game.inventory[4]?.image != null"><img></app-inventoryslot>
+      </div>
+      <br>
+      <div id="row-2">
+        <app-inventoryslot id="5" class="slot"><img [src]="this.game.inventory[5]?.image.src" [alt]="this.game.inventory[5]?.image.alt" *ngIf="this.game.inventory[5]?.image != null"><img></app-inventoryslot>
+        <app-inventoryslot id="6" class="slot"><img [src]="this.game.inventory[6]?.image.src" [alt]="this.game.inventory[6]?.image.alt" *ngIf="this.game.inventory[6]?.image != null"><img></app-inventoryslot>
+        <app-inventoryslot id="7" class="slot"><img [src]="this.game.inventory[7]?.image.src" [alt]="this.game.inventory[7]?.image.alt" *ngIf="this.game.inventory[7]?.image != null"><img></app-inventoryslot>
+      </div>
+      <br>
+      <div id="row-3">
+        <app-inventoryslot id="8" class="slot"><img [src]="this.game.inventory[8]?.image.src" [alt]="this.game.inventory[8]?.image.alt" *ngIf="this.game.inventory[8]?.image != null"><img></app-inventoryslot>
+        <app-inventoryslot id="9" class="slot"><img [src]="this.game.inventory[9]?.image.src" [alt]="this.game.inventory[9]?.image.alt" *ngIf="this.game.inventory[9]?.image != null"><img></app-inventoryslot>
+        <app-inventoryslot id="10" class="slot"><img [src]="this.game.inventory[10]?.image.src" [alt]="this.game.inventory[10]?.image.alt" *ngIf="this.game.inventory[10]?.image != null"><img></app-inventoryslot>
+      </div>
+    </div>
+  </div>
 </div>
