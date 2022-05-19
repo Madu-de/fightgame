@@ -19,11 +19,9 @@ $width: 275px;
 }
 
 #hotbar {
-  position: relative;
-  top: 180px;
   display: grid;
   text-align: center;
-  margin: 0 auto;
+  margin-bottom: 30px;
   width: $width;
 
   .hotbarSlot {
@@ -32,8 +30,6 @@ $width: 275px;
 }
 
 #inv {
-  position: relative;
-  top: 100px;
   display: grid;
   text-align: center;
   margin: 0 auto;
@@ -42,7 +38,7 @@ $width: 275px;
   position: absolute;
   left: 50%;
   top: 50%;
-  transform: translate(-50%, -50%);
+  transform: translate(-50%, -65%);
 
   app-inventoryslot {
     margin: 5px;
@@ -52,5 +48,21 @@ $width: 275px;
 app-inventoryslot {
   img {
     object-fit: cover;
+  }
+}
+
+button {
+  width: 50%;
+  margin: 0 auto;
+  margin-top: 20px;
+  border: none;
+  border-radius: 5px;
+  padding: 5px;
+  font-size: 20px;
+  box-shadow: 0 0 8px;
+  cursor: pointer;
+
+  &:hover {
+    transform: scale(98%);
   }
 }

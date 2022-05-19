@@ -2,12 +2,11 @@
   <!--<div class="charakterScreen">Charakter</div>-->
   <!--Inventory Hotbar-->
   <div id="inventory">
-    <div id="hotbar">
-      <app-inventoryslot class="hotbarSlot slot" id="sword_slot"><img [src]="this.game.inventory[0]?.image.src" [alt]="this.game.inventory[0]?.image.alt" *ngIf="this.game.inventory[0]?.image != null"><img></app-inventoryslot>
-      <app-inventoryslot class="hotbarSlot slot" id="armor_slot"><img [src]="this.game.inventory[1]?.image.src" [alt]="this.game.inventory[1]?.image.alt" *ngIf="this.game.inventory[1]?.image != null"><img></app-inventoryslot>
-    </div>
-
     <div id="inv">
+      <div id="hotbar">
+        <app-inventoryslot class="hotbarSlot slot" id="sword_slot"><img [src]="this.game.inventory[0]?.image.src" [alt]="this.game.inventory[0]?.image.alt" *ngIf="this.game.inventory[0]?.image != null"><img></app-inventoryslot>
+        <app-inventoryslot class="hotbarSlot slot" id="armor_slot"><img [src]="this.game.inventory[1]?.image.src" [alt]="this.game.inventory[1]?.image.alt" *ngIf="this.game.inventory[1]?.image != null"><img></app-inventoryslot>
+      </div>
       <div id="row-1">
         <app-inventoryslot id="2" class="slot"><img [src]="this.game.inventory[2]?.image.src" [alt]="this.game.inventory[2]?.image.alt" *ngIf="this.game.inventory[2]?.image != null"><img></app-inventoryslot>
         <app-inventoryslot id="3" class="slot"><img [src]="this.game.inventory[3]?.image.src" [alt]="this.game.inventory[3]?.image.alt" *ngIf="this.game.inventory[3]?.image != null"><img></app-inventoryslot>
@@ -25,6 +24,7 @@
         <app-inventoryslot id="9" class="slot"><img [src]="this.game.inventory[9]?.image.src" [alt]="this.game.inventory[9]?.image.alt" *ngIf="this.game.inventory[9]?.image != null"><img></app-inventoryslot>
         <app-inventoryslot id="10" class="slot"><img [src]="this.game.inventory[10]?.image.src" [alt]="this.game.inventory[10]?.image.alt" *ngIf="this.game.inventory[10]?.image != null"><img></app-inventoryslot>
       </div>
+      <button [disabled]="this.buttonIsNotVisible" (click)="buttonHandler()">Benutzen</button>
     </div>
   </div>
 </div>

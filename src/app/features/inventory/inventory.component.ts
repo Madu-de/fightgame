@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Potion } from 'src/app/classes/potion';
 import { Sword } from 'src/app/classes/sword';
 import { GameService } from '../../services/game.service';
 import { UserService } from '../../services/user.service';
@@ -11,6 +12,7 @@ import { UserService } from '../../services/user.service';
 export class InventoryComponent implements OnInit {
 
   public pair: number[] = [];
+  public buttonIsNotVisible: boolean = true;
 
   constructor(public game: GameService, public user: UserService) { }
 
@@ -21,6 +23,11 @@ export class InventoryComponent implements OnInit {
     for (let i = 0; i < this.getHTMLElementSlots().length; i++) {
       const element = this.getHTMLElementSlots()[i];
       element.addEventListener('click', () => {
+        if (this.game.inventory[i]?.idName.startsWith('potion')) {
+          this.buttonIsNotVisible = false;
+        } else {
+          this.buttonIsNotVisible = true;
+        }
         this.addSlotToPair(i);
         this.showInformations(i);
       })
@@ -71,6 +78,14 @@ export class InventoryComponent implements OnInit {
     let nine: HTMLElement | null = document.getElementById('9');
     let ten: HTMLElement | null = document.getElementById('10');
     return [swordSlot, armorSlot, two, three, four, five, six, seven, eight, nine, ten];
+  }
+
+  public buttonHandler(): void {
+    //let potion: Potion = this.game.inventory[this.pair[0]];
+    this.game.inventory[this.pair[0]] = undefined;
+    alert('Potion genommen!');
+    this.buttonIsNotVisible = true;
+    this.pair = [];
   }
 
 }

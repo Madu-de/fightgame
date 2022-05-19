@@ -29,10 +29,10 @@ export class Monster {
     };
     public xp: number = 0;
 
-    constructor(name: string, description: string, image: Image, spezies: MonsterSpezies, buttonLeft: CardButton, buttonRight: CardButton, xp: number) {
+    constructor(name: string, description: string, spezies: MonsterSpezies, buttonLeft: CardButton, buttonRight: CardButton, xp: number) {
         this.name = name;
         this.description = description;
-        this.image = { src: './assets/card-images/' + image.src, alt: image.alt };
+        this.image = { src: './assets/card-images/' + name.toLowerCase() + '.png', alt: name };
         this.spezies = spezies;
         this.buttonLeft = buttonLeft;
         this.buttonRight = buttonRight;

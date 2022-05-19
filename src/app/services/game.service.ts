@@ -22,32 +22,32 @@ export class GameService {
   constructor(private router: Router, public user: UserService) { }
 
   public allMonsters: Monster[] = [
-    new Monster('Igor', 'Pferd-Herrscher', { src: 'igor.png', alt: 'Igor' }, MonsterSpezies.Herrscher, { content: 'Gehen', show: true, click: () => { this.go() } }, { content: 'Kämpfen', show: true, click: () => { this.fight() } }, 50),
-    new Monster('Gerian', 'Troll', { src: 'gerian.png', alt: 'Gerian' }, MonsterSpezies.Troll, { content: 'Gehen', show: true, click: () => { this.go() } }, { content: 'Kämpfen', show: true, click: () => { this.fight() } }, 20),
-    new Monster('Lina', 'Drachen-Hexe', { src: 'lina.jpg', alt: 'Lina' }, MonsterSpezies.Hexe, { content: 'Gehen', show: true, click: () => { this.go() } }, { content: 'Kämpfen', show: true, click: () => { this.fight() } }, 40),
-    new Monster('Lilli', 'Drachen-Assasinin', { src: 'lilli.jpg', alt: 'Lilli' }, MonsterSpezies.Assasine, { content: 'Gehen', show: true, click: () => { this.go() } }, { content: 'Kämpfen', show: true, click: () => { this.fight() } }, 60),
-    new Monster('Max', 'Troll', { src: 'max.jpg', alt: 'Max' }, MonsterSpezies.Troll, { content: 'Gehen', show: true, click: () => { this.go() } }, { content: 'Kämpfen', show: true, click: () => this.fight() }, 20),
-    new Monster('Jannik', 'Zombie', { src: 'jannik.jpg', alt: 'Jannik' }, MonsterSpezies.Zombie, { content: 'Gehen', show: true, click: () => { this.go() } }, { content: 'Kämpfen', show: true, click: () => { this.fight() } }, 30),
-    new Monster('Julius', 'Ork', { src: 'julius.jpg', alt: 'Julius' }, MonsterSpezies.Ork, { content: 'Gehen', show: true, click: () => { this.go() } }, { content: 'Kämpfen', show: true, click: () => { this.fight() } }, 30),
-    new Monster('Leif', 'Zombie', { src: 'leif.jpg', alt: 'Leif' }, MonsterSpezies.Zombie, { content: 'Gehen', show: true, click: () => { this.go() } }, { content: 'Kämpfen', show: true, click: () => { this.fight() } }, 20),
-    new Monster('Jonah', 'Dementor', { src: 'jonah.jpg', alt: 'Jonah' }, MonsterSpezies.Dementor, { content: 'Gehen', show: true, click: () => { this.go() } }, { content: 'Kämpfen', show: true, click: () => { this.fight() } }, 30)
+    new Monster('Igor', 'Pferd-Herrscher', MonsterSpezies.Herrscher, { content: 'Gehen', show: true, click: () => { this.go() } }, { content: 'Kämpfen', show: true, click: () => { this.fight() } }, 50),
+    new Monster('Gerian', 'Troll', MonsterSpezies.Troll, { content: 'Gehen', show: true, click: () => { this.go() } }, { content: 'Kämpfen', show: true, click: () => { this.fight() } }, 20),
+    new Monster('Lina', 'Drachen-Hexe', MonsterSpezies.Hexe, { content: 'Gehen', show: true, click: () => { this.go() } }, { content: 'Kämpfen', show: true, click: () => { this.fight() } }, 40),
+    new Monster('Lilli', 'Drachen-Assasinin', MonsterSpezies.Assasine, { content: 'Gehen', show: true, click: () => { this.go() } }, { content: 'Kämpfen', show: true, click: () => { this.fight() } }, 60),
+    new Monster('Max', 'Troll', MonsterSpezies.Troll, { content: 'Gehen', show: true, click: () => { this.go() } }, { content: 'Kämpfen', show: true, click: () => this.fight() }, 20),
+    new Monster('Jannik', 'Zombie', MonsterSpezies.Zombie, { content: 'Gehen', show: true, click: () => { this.go() } }, { content: 'Kämpfen', show: true, click: () => { this.fight() } }, 30),
+    new Monster('Julius', 'Ork', MonsterSpezies.Ork, { content: 'Gehen', show: true, click: () => { this.go() } }, { content: 'Kämpfen', show: true, click: () => { this.fight() } }, 30),
+    new Monster('Leif', 'Zombie', MonsterSpezies.Zombie, { content: 'Gehen', show: true, click: () => { this.go() } }, { content: 'Kämpfen', show: true, click: () => { this.fight() } }, 20),
+    new Monster('Jonah', 'Dementor', MonsterSpezies.Dementor, { content: 'Gehen', show: true, click: () => { this.go() } }, { content: 'Kämpfen', show: true, click: () => { this.fight() } }, 30)
   ]
 
   public allBosses: Boss[] = [
-    new Boss(0, 'Peter', 'Affen-Herrscher', { src: './assets/card-image/', alt: 'Peter' }, MonsterSpezies.Riesenaffe, { content: 'Gehen', show: true, click: () => { this.go() } }, { content: 'Kämpfen', show: true, click: () => { this.fight() } }, 500),
-    new Boss(1, 'Daniel', 'Drache', { src: 'daniel.png', alt: 'Daniel' }, MonsterSpezies.Drache, { content: 'Gehen', show: true, click: () => { this.go() } }, { content: 'Kämpfen', show: true, click: () => { this.fight() } }, 1000),
+    new Boss(0, 'Peter', 'Affen-Herrscher', MonsterSpezies.Riesenaffe, { content: 'Gehen', show: true, click: () => { this.go() } }, { content: 'Kämpfen', show: true, click: () => { this.fight() } }, 500),
+    new Boss(1, 'Daniel', 'Drache', MonsterSpezies.Drache, { content: 'Gehen', show: true, click: () => { this.go() } }, { content: 'Kämpfen', show: true, click: () => { this.fight() } }, 1000),
     //new Boss('Lukas')
     //new Boss('Momme', ''),
     //new Boss('Felipe')
   ]
 
   public allItems: Item[] = [
-    new Potion('potion_heal', 'Heilungstrank', '', 0, 5, 0, 10, { src: 'position_heal.png', alt: 'Trank' }, 0),
-    new Sword('sword_wood', 'Holzschwert', '', 2, 0, 0, 20, { src: 'sword_wood.png', alt: 'Schwert' }, 5),
-    new Armor('armor_lether', 'Lederrüstung', '', 0, 0, 5, 20, { src: 'armor_lether.png', alt: 'Rüstung' }, 5),
-    new Sword('sword_eisen', 'Eisenschwert', '', 5, 0, 0, 50, { src: 'sword_eisen.png', alt: 'Eisenschwert' }, 20),
-    new Potion('potion_strength', 'Stärketrank', '', 10, 0, 0, 80, { src: 'position_strength.png', alt: 'Stärketrank' }, 5),
-    new Sword('sword_gold', 'Goldschwert', '', 15, 0, 0, 100, { src: 'sword_gold.png', alt: 'Goldschwert' }, 15)
+    new Potion('potion_heal', 'Heilungstrank', '', 0, 5, 0, 10, 0),
+    new Sword('sword_wood', 'Holzschwert', '', 2, 0, 0, 20, 5),
+    new Armor('armor_lether', 'Lederrüstung', '', 0, 0, 5, 20, 5),
+    new Sword('sword_eisen', 'Eisenschwert', '', 5, 0, 0, 50, 20),
+    new Potion('potion_strength', 'Stärketrank', '', 10, 0, 0, 80, 5),
+    new Sword('sword_gold', 'Goldschwert', '', 15, 0, 0, 100, 15)
   ]
 
   public fee: Fee = new Fee();
@@ -55,10 +55,11 @@ export class GameService {
   public inventory: any[] = [
     this.getItemByIdName('sword_wood'),
     this.getItemByIdName('armor_lether'),
-
+    this.getItemByIdName('potion_heal'),
+    this.getItemByIdName('potion_strength')
   ]
 
-  public enemy = new Monster('Henrik', 'Tutorial-Goblin', { src: 'tutorial-goblin.jpg', alt: 'Henrik' }, MonsterSpezies.Goblin, { content: '', show: false, click: () => { } }, { content: 'Kämpfen', show: true, click: () => { this.fight(); } }, 10);
+  public enemy = new Monster('Henrik', 'Tutorial-Goblin', MonsterSpezies.Goblin, { content: '', show: false, click: () => { } }, { content: 'Kämpfen', show: true, click: () => { this.fight(); } }, 10);
 
   public checkData(withData: string, withoutData: string) { // Check the localstorage of the client
     let data = this.getDataFromLocalStorage();

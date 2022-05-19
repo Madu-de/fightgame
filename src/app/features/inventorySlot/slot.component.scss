@@ -7,17 +7,9 @@
     padding: 2px;
 }
 
-
-@media screen and (min-width: 375px) {
+@media screen and (max-height: 600px) {
   .slot {
-    height: 60px;
-    width: 60px;
-  }
-}
-
-@media screen and (min-width: 500px) {
-  .slot {
-    height: 70px;
-    width: 70px;
+    height: 30px;
+    width: 30px;
   }
 }
