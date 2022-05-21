@@ -1,4 +1,4 @@
-import { Image } from '../interfaces/image';
+import { Image } from '../classes/image';
 
 export class Item {
     public idName: string | undefined;
@@ -18,6 +18,6 @@ export class Item {
         this.health = health;
         this.shield = shield;
         this.price = price;
-        this.image = { src: './assets/item-images/' + idName.toLowerCase() + '.png', alt: name };
+        this.image = new Image('./assets/item-images/' + idName.toLowerCase() + '.png', name);
     }
 }

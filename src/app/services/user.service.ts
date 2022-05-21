@@ -28,7 +28,7 @@ export class UserService {
     }
   }
 
-  public addLvl() {
+  public addLvl(): void {
     this.lvl++;
     this.maxXp += 20;
   }
@@ -37,5 +37,9 @@ export class UserService {
     let result = 100 / this.maxXp; // get 1% from the maxXp
     result = result * this.xp; // get xp in percent
     return result;
+  }
+
+  public addHealth(health: number): void {
+    this.health += health;
   }
 }

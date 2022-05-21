@@ -1,16 +1,13 @@
 import { MonsterSpezies } from '../enums/monsterSpezies.enum';
 import { CardButton } from '../interfaces/cardButton';
-import { Image } from '../interfaces/image';
+import { Image } from '../classes/image';
 import { MonsterStats } from '../interfaces/monsterStats';
 import { MinMax } from '../interfaces/minMax';
 
 export class Monster {
     public name: string = '';
     public description: string = '';
-    public image: Image = {
-        src: '',
-        alt: ''
-    };
+    public image: Image | undefined;
     public spezies: MonsterSpezies = MonsterSpezies.Goblin;
     public stats: MonsterStats = {
         attack: 0,
@@ -32,7 +29,7 @@ export class Monster {
     constructor(name: string, description: string, spezies: MonsterSpezies, buttonLeft: CardButton, buttonRight: CardButton, xp: number) {
         this.name = name;
         this.description = description;
-        this.image = { src: './assets/card-images/' + name.toLowerCase() + '.png', alt: name };
+        this.image = new Image('./assets/card-images/' + name.toLowerCase() + '.png', name);
         this.spezies = spezies;
         this.buttonLeft = buttonLeft;
         this.buttonRight = buttonRight;

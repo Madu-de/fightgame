@@ -8,6 +8,7 @@ import { Monster } from '../classes/monster';
 import { Potion } from '../classes/potion';
 import { Sword } from '../classes/sword';
 import { MonsterSpezies } from '../enums/monsterSpezies.enum';
+import { CardButton } from '../interfaces/cardButton';
 import { UserService } from './user.service';
 
 @Injectable({
@@ -21,21 +22,25 @@ export class GameService {
 
   constructor(private router: Router, public user: UserService) { }
 
+  // Default values for the buttons of the monsters
+  private buttonLeftDefault: CardButton = { content: 'Gehen', show: true, click: () => { this.go() } };
+  private buttonRightDefault: CardButton = { content: 'Kämpfen', show: true, click: () => { this.fight() } };
+
   public allMonsters: Monster[] = [
-    new Monster('Igor', 'Pferd-Herrscher', MonsterSpezies.Herrscher, { content: 'Gehen', show: true, click: () => { this.go() } }, { content: 'Kämpfen', show: true, click: () => { this.fight() } }, 50),
-    new Monster('Gerian', 'Troll', MonsterSpezies.Troll, { content: 'Gehen', show: true, click: () => { this.go() } }, { content: 'Kämpfen', show: true, click: () => { this.fight() } }, 20),
-    new Monster('Lina', 'Drachen-Hexe', MonsterSpezies.Hexe, { content: 'Gehen', show: true, click: () => { this.go() } }, { content: 'Kämpfen', show: true, click: () => { this.fight() } }, 40),
-    new Monster('Lilli', 'Drachen-Assasinin', MonsterSpezies.Assasine, { content: 'Gehen', show: true, click: () => { this.go() } }, { content: 'Kämpfen', show: true, click: () => { this.fight() } }, 60),
-    new Monster('Max', 'Troll', MonsterSpezies.Troll, { content: 'Gehen', show: true, click: () => { this.go() } }, { content: 'Kämpfen', show: true, click: () => this.fight() }, 20),
-    new Monster('Jannik', 'Zombie', MonsterSpezies.Zombie, { content: 'Gehen', show: true, click: () => { this.go() } }, { content: 'Kämpfen', show: true, click: () => { this.fight() } }, 30),
-    new Monster('Julius', 'Ork', MonsterSpezies.Ork, { content: 'Gehen', show: true, click: () => { this.go() } }, { content: 'Kämpfen', show: true, click: () => { this.fight() } }, 30),
-    new Monster('Leif', 'Zombie', MonsterSpezies.Zombie, { content: 'Gehen', show: true, click: () => { this.go() } }, { content: 'Kämpfen', show: true, click: () => { this.fight() } }, 20),
-    new Monster('Jonah', 'Dementor', MonsterSpezies.Dementor, { content: 'Gehen', show: true, click: () => { this.go() } }, { content: 'Kämpfen', show: true, click: () => { this.fight() } }, 30)
+    new Monster('Igor', 'Pferd-Herrscher', MonsterSpezies.Herrscher, this.buttonLeftDefault, this.buttonRightDefault, 50),
+    new Monster('Gerian', 'Troll', MonsterSpezies.Troll, this.buttonLeftDefault, this.buttonRightDefault, 20),
+    new Monster('Lina', 'Drachen-Hexe', MonsterSpezies.Hexe, this.buttonLeftDefault, this.buttonRightDefault, 40),
+    new Monster('Lilli', 'Drachen-Assasinin', MonsterSpezies.Assasine, this.buttonLeftDefault, this.buttonRightDefault, 60),
+    new Monster('Max', 'Troll', MonsterSpezies.Troll, this.buttonLeftDefault, this.buttonRightDefault, 20),
+    new Monster('Jannik', 'Zombie', MonsterSpezies.Zombie, this.buttonLeftDefault, this.buttonRightDefault, 30),
+    new Monster('Julius', 'Ork', MonsterSpezies.Ork, this.buttonLeftDefault, this.buttonRightDefault, 30),
+    new Monster('Leif', 'Zombie', MonsterSpezies.Zombie, this.buttonLeftDefault, this.buttonRightDefault, 20),
+    new Monster('Jonah', 'Dementor', MonsterSpezies.Dementor, this.buttonLeftDefault, this.buttonRightDefault, 30)
   ]
 
   public allBosses: Boss[] = [
-    new Boss(0, 'Peter', 'Affen-Herrscher', MonsterSpezies.Riesenaffe, { content: 'Gehen', show: true, click: () => { this.go() } }, { content: 'Kämpfen', show: true, click: () => { this.fight() } }, 500),
-    new Boss(1, 'Daniel', 'Drache', MonsterSpezies.Drache, { content: 'Gehen', show: true, click: () => { this.go() } }, { content: 'Kämpfen', show: true, click: () => { this.fight() } }, 1000),
+    new Boss(0, 'Peter', 'Affen-Herrscher', MonsterSpezies.Riesenaffe, this.buttonLeftDefault, this.buttonRightDefault, 500),
+    new Boss(1, 'Daniel', 'Drache', MonsterSpezies.Drache, this.buttonLeftDefault, this.buttonRightDefault, 1000),
     //new Boss('Lukas')
     //new Boss('Momme', ''),
     //new Boss('Felipe')
@@ -47,7 +52,8 @@ export class GameService {
     new Armor('armor_lether', 'Lederrüstung', '', 0, 0, 5, 20, 5),
     new Sword('sword_eisen', 'Eisenschwert', '', 5, 0, 0, 50, 20),
     new Potion('potion_strength', 'Stärketrank', '', 10, 0, 0, 80, 5),
-    new Sword('sword_gold', 'Goldschwert', '', 15, 0, 0, 100, 15)
+    new Sword('sword_gold', 'Goldschwert', '', 15, 0, 0, 100, 15),
+    new Armor('armor_gum', 'Gummi Rüstung', '', 0, 0, 50, 2500, 100)
   ]
 
   public fee: Fee = new Fee();
@@ -56,10 +62,17 @@ export class GameService {
     this.getItemByIdName('sword_wood'),
     this.getItemByIdName('armor_lether'),
     this.getItemByIdName('potion_heal'),
-    this.getItemByIdName('potion_strength')
+    this.getItemByIdName('potion_strength'),
+    undefined,
+    undefined,
+    undefined,
+    undefined,
+    undefined,
+    undefined,
+    this.getItemByIdName('sword_gold')
   ]
 
-  public enemy = new Monster('Henrik', 'Tutorial-Goblin', MonsterSpezies.Goblin, { content: '', show: false, click: () => { } }, { content: 'Kämpfen', show: true, click: () => { this.fight(); } }, 10);
+  public enemy = new Monster('Henrik', 'Tutorial-Goblin', MonsterSpezies.Goblin, { content: '', show: false, click: () => { } }, this.buttonRightDefault, 10);
 
   public checkData(withData: string, withoutData: string) { // Check the localstorage of the client
     let data = this.getDataFromLocalStorage();
@@ -208,7 +221,6 @@ export class GameService {
     } catch (e) {
       return false;
     }
-
   }
 
   public saveInLocalStorage(_user: any, _enemy: any): boolean {

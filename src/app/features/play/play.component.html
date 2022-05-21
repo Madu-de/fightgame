@@ -2,7 +2,7 @@
   <div class="card-play fadeInObject">
     <h1>{{this.game.enemy.name}}</h1>
     <p>{{this.game.enemy.description}}</p>
-    <img [src]="this.game.enemy.image.src" [alt]="this.game.enemy.image.alt">
+    <img [src]="this.game.enemy.image?.src" [alt]="this.game.enemy.image?.alt">
     <table>
       <tr>
         <th>Spezies</th>

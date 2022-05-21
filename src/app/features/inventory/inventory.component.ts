@@ -1,6 +1,5 @@
 import { Component, OnInit } from '@angular/core';
 import { Potion } from 'src/app/classes/potion';
-import { Sword } from 'src/app/classes/sword';
 import { GameService } from '../../services/game.service';
 import { UserService } from '../../services/user.service';
 
@@ -28,9 +27,11 @@ export class InventoryComponent implements OnInit {
         } else {
           this.buttonIsNotVisible = true;
         }
+
         this.addSlotToPair(i);
         this.showInformations(i);
-      })
+
+      });
     }
   }
 
@@ -59,6 +60,7 @@ export class InventoryComponent implements OnInit {
     }
     this.game.inventory[pair[0]] = two;
     this.game.inventory[pair[1]] = one;
+
   }
 
   private showInformations(slot: number) {
@@ -81,9 +83,15 @@ export class InventoryComponent implements OnInit {
   }
 
   public buttonHandler(): void {
-    //let potion: Potion = this.game.inventory[this.pair[0]];
+    let potion: Potion = this.game.inventory[this.pair[0]];
     this.game.inventory[this.pair[0]] = undefined;
-    alert('Potion genommen!');
+
+    // Use the potion
+    if (potion.idName == 'potion_heal') {
+      this.user.addHealth(5);
+      this.game.saveInLocalStorage(this.user, this.game.enemy);
+    }
+
     this.buttonIsNotVisible = true;
     this.pair = [];
   }
