@@ -91,7 +91,7 @@ export class InventoryComponent implements OnInit {
     this.user.addHealth(potion.health);
     this.user.addShield(potion.shield);
     this.user.activePotions.push(potion);
-    this.game.saveInLocalStorage(this.user, this.game.enemy);
+    this.game.saveInLocalStorage(this.user, this.game.enemy, this.game.inventory);
 
     this.buttonIsNotVisible = true;
     this.pair = [];

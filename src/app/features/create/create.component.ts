@@ -61,7 +61,7 @@ export class CreateComponent implements OnInit {
     this.user.lvl = 1;
     this.user.maxXp = 50;
     this.game.enemy.setStats(this.user.lvl);
-    this.game.saveInLocalStorage(this.user, this.game.enemy);
+    this.game.saveInLocalStorage(this.user, this.game.enemy, this.game.inventory);
     location.href = '/';
   }
 }

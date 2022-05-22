@@ -126,7 +126,7 @@ export class GameService {
         if (this.user.shield < 0) {
           this.user.shield = 0;
         }
-        this.saveInLocalStorage(this.user, this.enemy);
+        this.saveInLocalStorage(this.user, this.enemy, this.inventory);
         this.actionIsRunning = false;
         this.checkIfTheUserIsDead();
       }, 400);
@@ -174,7 +174,7 @@ export class GameService {
       setTimeout(() => {
         this.enemy = this.getRandomMonster();
         this.card[0].classList.remove('none');
-        this.saveInLocalStorage(this.user, this.enemy);
+        this.saveInLocalStorage(this.user, this.enemy, this.inventory);
         this.managePotions();
       }, 100);
     }, 450);
@@ -193,7 +193,7 @@ export class GameService {
         return; // potion health is always active
       }
       element.rounds--;
-      this.saveInLocalStorage(this.user, this.enemy);
+      this.saveInLocalStorage(this.user, this.enemy, this.inventory);
       if (element.rounds == 0) {
         this.user.removeAttack(element.attack);
         this.user.removeHealth(element.health);
@@ -204,7 +204,7 @@ export class GameService {
           potion.idName == element.idName
         }), 1);
 
-        this.saveInLocalStorage(this.user, this.enemy);
+        this.saveInLocalStorage(this.user, this.enemy, this.inventory);
       }
     }
   }
@@ -242,6 +242,10 @@ export class GameService {
       this.user.maxXp = data.user.maxXp;
       this.user.gold = data.user.gold;
       this.user.activePotions = data.user.activePotions;
+
+      //inventory
+      this.inventory = data.inventory;
+
       // enemy
       this.enemy = data.enemy;
       this.enemy.buttonLeft.click = functions.buttonLeft;
@@ -253,11 +257,12 @@ export class GameService {
     }
   }
 
-  public saveInLocalStorage(_user: any, _enemy: any): boolean {
+  public saveInLocalStorage(_user: any, _enemy: any, _inventory: any): boolean {
     try {
       let data = {
         user: _user,
         enemy: _enemy,
+        inventory: _inventory,
         settings: 'settings' //TODO Save Settings
       }
       localStorage.setItem('fg:data', JSON.stringify(data));

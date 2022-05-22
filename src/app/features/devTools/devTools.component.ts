@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Item } from 'src/app/classes/item';
 import { UserService } from 'src/app/services/user.service';
 import { GameService } from '../../services/game.service';
 
@@ -48,6 +49,27 @@ export class DevToolsComponent implements OnInit {
     }
   }
 
+  public addItemToInventory() {
+    let input: string | null = prompt('Gebe die ID des Items ein:');
+    if (typeof input == 'string') {
+      let item: Item = this.game.getItemByIdName(input);
+
+      if (item == undefined) {
+        alert(`Dieses Item { ${input} } existiert nicht!`);
+        return;
+      }
+
+      for (let i = 0; i < this.game.inventory.length; i++) {
+        const element = this.game.inventory[i];
+        if (element == undefined) {
+          this.game.inventory[i] = item;
+          this.game.saveInLocalStorage(this.user, this.game.enemy, this.game.inventory)
+          return;
+        }
+      }
+    }
+  }
+
   public setHealth() {
     let input: string | null = null;
     while (input == null) {
@@ -57,7 +79,7 @@ export class DevToolsComponent implements OnInit {
       input = '0';
     }
     this.user.health = parseFloat(input);
-    this.game.saveInLocalStorage(this.user, this.game.enemy);
+    this.game.saveInLocalStorage(this.user, this.game.enemy, this.game.inventory);
   }
 
   public setAttack() {
@@ -69,7 +91,7 @@ export class DevToolsComponent implements OnInit {
       input = '0';
     }
     this.user.attack = parseFloat(input);
-    this.game.saveInLocalStorage(this.user, this.game.enemy);
+    this.game.saveInLocalStorage(this.user, this.game.enemy, this.game.inventory);
   }
 
   public setShield() {
@@ -81,7 +103,7 @@ export class DevToolsComponent implements OnInit {
       input = '0';
     }
     this.user.shield = parseFloat(input);
-    this.game.saveInLocalStorage(this.user, this.game.enemy);
+    this.game.saveInLocalStorage(this.user, this.game.enemy, this.game.inventory);
   }
 
   public setGold() {
@@ -93,7 +115,7 @@ export class DevToolsComponent implements OnInit {
       input = '0';
     }
     this.user.gold = parseInt(input);
-    this.game.saveInLocalStorage(this.user, this.game.enemy);
+    this.game.saveInLocalStorage(this.user, this.game.enemy, this.game.inventory);
   }
 
   public setXp() {
@@ -105,7 +127,7 @@ export class DevToolsComponent implements OnInit {
       input = '0';
     }
     this.user.xp = parseInt(input);
-    this.game.saveInLocalStorage(this.user, this.game.enemy);
+    this.game.saveInLocalStorage(this.user, this.game.enemy, this.game.inventory);
   }
 
   public setLvl() {
@@ -117,7 +139,7 @@ export class DevToolsComponent implements OnInit {
       input = '0';
     }
     this.user.lvl = parseInt(input);
-    this.game.saveInLocalStorage(this.user, this.game.enemy);
+    this.game.saveInLocalStorage(this.user, this.game.enemy, this.game.inventory);
   }
 
 

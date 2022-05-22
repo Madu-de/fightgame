@@ -8,6 +8,9 @@
   <div class="button" (click)="this.game.saveDataFromLocalStorage()">
     <p>Save from Localstorage</p>
   </div>
+  <div class="button" (click)="this.addItemToInventory()">
+    <p>Item hinzufügen</p>
+  </div>
   <div class="button" (click)="this.setHealth()">
     <p>Set Health</p>
   </div>
@@ -26,7 +29,7 @@
   <div class="button" (click)="this.setLvl()">
     <p>Set Level</p>
   </div>
-  <div class="button" (click)="this.game.saveInLocalStorage(this.game.user, this.game.enemy)">
+  <div class="button" (click)="this.game.saveInLocalStorage(this.game.user, this.game.enemy, this.game.inventory)">
     <p>Save in Localstorage</p>
   </div>
   <div class="button" (click)="this.openAndCloseDevToolsInput()">
