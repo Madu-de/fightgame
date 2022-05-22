@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Item } from '../classes/item';
+import { Potion } from '../classes/potion';
 import { Gender } from '../enums/gender.enum';
 
 @Injectable({
@@ -7,7 +8,6 @@ import { Gender } from '../enums/gender.enum';
 })
 export class UserService {
 
-  constructor() { }
   public username: string = '';
   public gender: Gender = Gender.man; // men or women
   public health: number = 0;
@@ -17,6 +17,8 @@ export class UserService {
   public xp: number = 0;
   public maxXp: number = 0;
   public gold: number = 0;
+
+  public activePotions: Potion[] = [];
 
   public addXp(xp: number) {
     this.xp += xp;
@@ -41,5 +43,25 @@ export class UserService {
 
   public addHealth(health: number): void {
     this.health += health;
+  }
+
+  public addAttack(attack: number): void {
+    this.attack += attack;
+  }
+
+  public addShield(shield: number): void {
+    this.shield += shield;
+  }
+
+  public removeAttack(attack: number): void {
+    this.attack -= attack;
+  }
+
+  public removeHealth(health: number): void {
+    this.health -= health;
+  }
+
+  public removeShield(shield: number): void {
+    this.shield -= shield;
   }
 }

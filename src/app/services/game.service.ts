@@ -63,7 +63,7 @@ export class GameService {
     this.getItemByIdName('armor_lether'),
     this.getItemByIdName('potion_heal'),
     this.getItemByIdName('potion_strength'),
-    undefined,
+    this.getItemByIdName('potion_strength'),
     undefined,
     undefined,
     undefined,
@@ -175,8 +175,38 @@ export class GameService {
         this.enemy = this.getRandomMonster();
         this.card[0].classList.remove('none');
         this.saveInLocalStorage(this.user, this.enemy);
+        this.managePotions();
       }, 100);
     }, 450);
+  }
+
+  private managePotions() {
+    if (this.user.activePotions.length == 0) {
+      return;
+    }
+    for (let i = 0; i < this.user.activePotions.length; i++) {
+      const element: Potion = this.user.activePotions[i];
+      if (element == undefined) {
+        return;
+      }
+      if (element.idName == 'potion_health') {
+        return; // potion health is always active
+      }
+      element.rounds--;
+      this.saveInLocalStorage(this.user, this.enemy);
+      if (element.rounds == 0) {
+        this.user.removeAttack(element.attack);
+        this.user.removeHealth(element.health);
+        this.user.removeShield(element.shield);
+
+        // Delete the potion from the array
+        this.user.activePotions.splice(this.user.activePotions.findIndex(potion => {
+          potion.idName == element.idName
+        }), 1);
+
+        this.saveInLocalStorage(this.user, this.enemy);
+      }
+    }
   }
 
   // localstorage
@@ -191,7 +221,6 @@ export class GameService {
     } catch (e) {
       return false;
     }
-
   }
 
   public saveDataFromLocalStorage(): boolean {
@@ -212,6 +241,7 @@ export class GameService {
       this.user.xp = data.user.xp;
       this.user.maxXp = data.user.maxXp;
       this.user.gold = data.user.gold;
+      this.user.activePotions = data.user.activePotions;
       // enemy
       this.enemy = data.enemy;
       this.enemy.buttonLeft.click = functions.buttonLeft;
@@ -225,7 +255,6 @@ export class GameService {
 
   public saveInLocalStorage(_user: any, _enemy: any): boolean {
     try {
-      //data
       let data = {
         user: _user,
         enemy: _enemy,

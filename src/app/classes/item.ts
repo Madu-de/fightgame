@@ -4,9 +4,9 @@ export class Item {
     public idName: string | undefined;
     public name: string | undefined;
     public description: string | undefined;
-    public attack: number | undefined;
-    public health: number | undefined;
-    public shield: number | undefined;
+    public attack: number = 0;
+    public health: number = 0;
+    public shield: number = 0;
     public price: number | undefined;
     public image: Image;
 

@@ -87,13 +87,13 @@ export class InventoryComponent implements OnInit {
     this.game.inventory[this.pair[0]] = undefined;
 
     // Use the potion
-    if (potion.idName == 'potion_heal') {
-      this.user.addHealth(5);
-      this.game.saveInLocalStorage(this.user, this.game.enemy);
-    }
+    this.user.addAttack(potion.attack);
+    this.user.addHealth(potion.health);
+    this.user.addShield(potion.shield);
+    this.user.activePotions.push(potion);
+    this.game.saveInLocalStorage(this.user, this.game.enemy);
 
     this.buttonIsNotVisible = true;
     this.pair = [];
   }
-
 }
