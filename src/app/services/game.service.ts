@@ -188,13 +188,10 @@ export class GameService {
     }
     for (let i = 0; i < this.user.activePotions.length; i++) {
       const element: Potion = this.user.activePotions[i];
-      console.log('Element: ', element);
       if (element != undefined) {
         if (element.idName != 'potion_heal') { // heal is infinite
           element.rounds--;
-          console.log('Eine Runde wurde entfernt!', element);
           if (element.rounds <= 0) {
-            console.log('Element hat 0 oder weniger Runden');
             this.user.removeAttack(element.attack);
             this.user.removeHealth(element.health);
             this.user.removeShield(element.shield);
@@ -208,7 +205,6 @@ export class GameService {
             if (arrayHaveChanged) { // all elements indexes has changed
               this.managePotions();
             }
-            console.log('Element wurde gelöscht!', element);
           }
         }
       }
