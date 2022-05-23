@@ -59,10 +59,10 @@ export class InventoryComponent implements OnInit {
       return; // only armor can be selected at inventory position 1
     }
     if (pair[0] == 0 && two != undefined && !two.idName.startsWith('sword')) {
-      return;
+      return; // only swords can be selected at inventory position 0
     }
     if (pair[0] == 1 && two != undefined && !two.idName.startsWith('armor')) {
-      return;
+      return; // only armor can be selected at inventory position 1
     }
     this.game.inventory[pair[0]] = two;
     this.game.inventory[pair[1]] = one;

@@ -11,7 +11,7 @@ This project was generated with [Angular CLI](https://github.com/angular/angular
 - sword_gold
 
 ### Armors
-- armor_lether
+- armor_leather
 - armor_iron
 - armor_gum
 

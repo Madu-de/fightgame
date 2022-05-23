@@ -58,7 +58,7 @@ export class GameService {
     new Sword('sword_iron', 'Eisenschwert', '', 20, 0, 0, 80, 20),
     new Sword('sword_gold', 'Goldschwert', '', 15, 0, 0, 100, 15),
 
-    new Armor('armor_lether', 'Lederrüstung', '', 0, 0, 5, 20, 5),
+    new Armor('armor_leather', 'Lederrüstung', '', 0, 0, 5, 20, 5),
     new Armor('armor_iron', 'Eisenrüstung', '', 0, 0, 20, 50, 20),
     new Armor('armor_gum', 'Gummi Rüstung', '', 0, 0, 50, 2500, 100),
 
