@@ -65,11 +65,6 @@ export class GameService {
     this.getItemByIdName('potion_heal'),
     this.getItemByIdName('potion_strength'),
     this.getItemByIdName('potion_strength'),
-    undefined,
-    undefined,
-    undefined,
-    undefined,
-    undefined,
     this.getItemByIdName('sword_gold')
   ]
 
