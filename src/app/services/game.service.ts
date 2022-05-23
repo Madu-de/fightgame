@@ -53,7 +53,8 @@ export class GameService {
     new Sword('sword_eisen', 'Eisenschwert', '', 5, 0, 0, 50, 20),
     new Potion('potion_strength', 'Stärketrank', '', 10, 0, 0, 80, 5),
     new Sword('sword_gold', 'Goldschwert', '', 15, 0, 0, 100, 15),
-    new Armor('armor_gum', 'Gummi Rüstung', '', 0, 0, 50, 2500, 100)
+    new Armor('armor_gum', 'Gummi Rüstung', '', 0, 0, 50, 2500, 100),
+    new Sword('sword_stone', 'Steinschwert', '', 15, 0, 0, 150, 30)
   ]
 
   public fee: Fee = new Fee();
@@ -180,32 +181,38 @@ export class GameService {
     }, 450);
   }
 
-  private managePotions() {
+  private managePotions(): void {
+    let arrayHaveChanged: boolean = false;
     if (this.user.activePotions.length == 0) {
       return;
     }
     for (let i = 0; i < this.user.activePotions.length; i++) {
       const element: Potion = this.user.activePotions[i];
-      if (element == undefined) {
-        return;
+      console.log('Element: ', element);
+      if (element != undefined) {
+        if (element.idName != 'potion_heal') { // heal is infinite
+          element.rounds--;
+          console.log('Eine Runde wurde entfernt!', element);
+          if (element.rounds <= 0) {
+            console.log('Element hat 0 oder weniger Runden');
+            this.user.removeAttack(element.attack);
+            this.user.removeHealth(element.health);
+            this.user.removeShield(element.shield);
+
+            // Delete the potion from the array
+            this.user.activePotions.splice(this.user.activePotions.findIndex(potion => {
+              arrayHaveChanged = true;
+              return potion.idName == element.idName;
+            }), 1);
+
+            if (arrayHaveChanged) { // all elements indexes has changed
+              this.managePotions();
+            }
+            console.log('Element wurde gelöscht!', element);
+          }
+        }
       }
-      if (element.idName == 'potion_health') {
-        return; // potion health is always active
-      }
-      element.rounds--;
       this.saveInLocalStorage(this.user, this.enemy, this.inventory);
-      if (element.rounds == 0) {
-        this.user.removeAttack(element.attack);
-        this.user.removeHealth(element.health);
-        this.user.removeShield(element.shield);
-
-        // Delete the potion from the array
-        this.user.activePotions.splice(this.user.activePotions.findIndex(potion => {
-          potion.idName == element.idName
-        }), 1);
-
-        this.saveInLocalStorage(this.user, this.enemy, this.inventory);
-      }
     }
   }
 

@@ -60,7 +60,7 @@ export class InventoryComponent implements OnInit {
     }
     this.game.inventory[pair[0]] = two;
     this.game.inventory[pair[1]] = one;
-
+    this.game.saveInLocalStorage(this.user, this.game.enemy, this.game.inventory);
   }
 
   private showInformations(slot: number) {
