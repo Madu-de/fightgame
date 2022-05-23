@@ -59,7 +59,7 @@ export class DevToolsComponent implements OnInit {
         return;
       }
 
-      for (let i = 0; i < this.game.inventory.length; i++) {
+      for (let i = 2; i < 11; i++) {
         const element = this.game.inventory[i];
         if (element == undefined) {
           this.game.inventory[i] = item;

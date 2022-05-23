@@ -52,15 +52,25 @@ export class InventoryComponent implements OnInit {
     if (one == undefined) { // click only on items
       return;
     }
-    if (pair[0] == 0 && !one.idName.startsWith('sword') || pair[1] == 0 && !one.idName?.startsWith('sword')) {
+    if (pair[0] == 0 && !one.idName.startsWith('sword') || pair[1] == 0 && !one.idName.startsWith('sword')) {
       return; // only swords can be selected at inventory position 0
     }
-    if (pair[0] == 1 && !one.idName.startsWith('armor') || pair[1] == 1 && !one.idName?.startsWith('armor')) {
+    if (pair[0] == 1 && !one.idName.startsWith('armor') || pair[1] == 1 && !one.idName.startsWith('armor')) {
       return; // only armor can be selected at inventory position 1
+    }
+    if (pair[0] == 0 && two != undefined && !two.idName.startsWith('sword')) {
+      return;
+    }
+    if (pair[0] == 1 && two != undefined && !two.idName.startsWith('armor')) {
+      return;
     }
     this.game.inventory[pair[0]] = two;
     this.game.inventory[pair[1]] = one;
     this.game.saveInLocalStorage(this.user, this.game.enemy, this.game.inventory);
+
+    if ((pair[0] == 0 || pair[1] == 0) || (pair[0] == 1 || pair[1] == 1)) {
+      this.game.manageHotbar();
+    }
   }
 
   private showInformations(slot: number) {

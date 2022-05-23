@@ -1,6 +1,8 @@
 import { Injectable } from '@angular/core';
+import { Armor } from '../classes/armor';
 import { Item } from '../classes/item';
 import { Potion } from '../classes/potion';
+import { Sword } from '../classes/sword';
 import { Gender } from '../enums/gender.enum';
 
 @Injectable({
@@ -19,6 +21,8 @@ export class UserService {
   public gold: number = 0;
 
   public activePotions: Potion[] = [];
+  public activeSword: Sword | undefined = undefined;
+  public activeArmor: Armor | undefined = undefined;
 
   public addXp(xp: number) {
     this.xp += xp;

@@ -45,7 +45,7 @@ export class Monster {
                 this.setupStats({ max: 20, min: 15 }, { max: 25, min: 15 }, { max: 20, min: 10 }, level);
                 break;
             case MonsterSpezies.Herrscher:
-                this.setupStats({ max: 50, min: 30 }, { max: 50, min: 20 }, { max: 30, min: 20 }, level);
+                this.setupStats({ max: 40, min: 30 }, { max: 40, min: 20 }, { max: 30, min: 20 }, level);
                 break;
             case MonsterSpezies.Hexe:
                 this.setupStats({ max: 45, min: 20 }, { max: 60, min: 40 }, { max: 10, min: 5 }, level);

@@ -11,6 +11,12 @@ import { MonsterSpezies } from '../enums/monsterSpezies.enum';
 import { CardButton } from '../interfaces/cardButton';
 import { UserService } from './user.service';
 
+/*
+TODO-List
+
+obenrechts aktive potions anzeigen
+*/
+
 @Injectable({
   providedIn: 'root'
 })
@@ -47,25 +53,22 @@ export class GameService {
   ]
 
   public allItems: Item[] = [
-    new Potion('potion_heal', 'Heilungstrank', '', 0, 5, 0, 10, 0),
     new Sword('sword_wood', 'Holzschwert', '', 2, 0, 0, 20, 5),
-    new Armor('armor_lether', 'Lederrüstung', '', 0, 0, 5, 20, 5),
-    new Sword('sword_eisen', 'Eisenschwert', '', 5, 0, 0, 50, 20),
-    new Potion('potion_strength', 'Stärketrank', '', 10, 0, 0, 80, 5),
+    new Sword('sword_stone', 'Steinschwert', '', 15, 0, 0, 50, 30),
+    new Sword('sword_iron', 'Eisenschwert', '', 20, 0, 0, 80, 20),
     new Sword('sword_gold', 'Goldschwert', '', 15, 0, 0, 100, 15),
+
+    new Armor('armor_lether', 'Lederrüstung', '', 0, 0, 5, 20, 5),
+    new Armor('armor_iron', 'Eisenrüstung', '', 0, 0, 20, 50, 20),
     new Armor('armor_gum', 'Gummi Rüstung', '', 0, 0, 50, 2500, 100),
-    new Sword('sword_stone', 'Steinschwert', '', 15, 0, 0, 150, 30)
+
+    new Potion('potion_heal', 'Heilungstrank', '', 0, 5, 0, 10, 0),
+    new Potion('potion_strength', 'Stärketrank', '', 10, 0, 0, 80, 5),
   ]
 
   public fee: Fee = new Fee();
 
   public inventory: any[] = [
-    this.getItemByIdName('sword_wood'),
-    this.getItemByIdName('armor_lether'),
-    this.getItemByIdName('potion_heal'),
-    this.getItemByIdName('potion_strength'),
-    this.getItemByIdName('potion_strength'),
-    this.getItemByIdName('sword_gold')
   ]
 
   public enemy = new Monster('Henrik', 'Tutorial-Goblin', MonsterSpezies.Goblin, { content: '', show: false, click: () => { } }, this.buttonRightDefault, 10);
@@ -207,6 +210,40 @@ export class GameService {
     }
   }
 
+  /**
+   * @title Manage the Hotbar
+   * @description Manage the sword and armor.
+   * @returns void
+   */
+  public manageHotbar(): void {
+    let swordPast: Sword | undefined = this.user.activeSword;
+    let armorPast: Armor | undefined = this.user.activeArmor;
+    let swordNow: Sword | undefined = this.inventory[0];
+    let armorNow: Armor | undefined = this.inventory[1];
+
+    if (swordPast != swordNow) {
+      if (swordPast != undefined) {
+        this.user.removeAttack(swordPast?.attack);
+      }
+      if (swordNow != undefined) {
+        this.user.addAttack(swordNow.attack);
+      }
+    }
+
+    if (armorPast != armorNow) {
+      if (armorPast != undefined) {
+        this.user.removeShield(armorPast?.shield);
+      }
+      if (armorNow != undefined) {
+        this.user.addShield(armorNow.shield);
+      }
+    }
+
+    this.user.activeSword = swordNow;
+    this.user.activeArmor = armorNow;
+    this.saveInLocalStorage(this.user, this.enemy, this.inventory);
+  }
+
   // localstorage
   public getDataFromLocalStorage(): boolean {
     try {
@@ -240,6 +277,8 @@ export class GameService {
       this.user.maxXp = data.user.maxXp;
       this.user.gold = data.user.gold;
       this.user.activePotions = data.user.activePotions;
+      this.user.activeSword = data.user.activeSword;
+      this.user.activeArmor = data.user.activeArmor;
 
       //inventory
       this.inventory = data.inventory;
