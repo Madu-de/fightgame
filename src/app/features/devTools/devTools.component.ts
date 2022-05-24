@@ -50,7 +50,7 @@ export class DevToolsComponent implements OnInit {
   }
 
   public addItemToInventory() {
-    let input: string | null = prompt('Gebe die ID des Items ein:');
+    let input: string | null = prompt('Gebe die ID des Items ein (Liste aller Items ist auf https://www.github.com/Madu-de/fightgame zu finden):');
     if (typeof input == 'string') {
       let item: Item = this.game.getItemByIdName(input);
 
