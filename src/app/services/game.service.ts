@@ -90,6 +90,7 @@ export class GameService {
       if (this.enemy.stats.shield > 0) {  // if the enemy have shield
         let attack = this.user.attack - this.enemy.stats.shield; // save the attack
         this.enemy.stats.shield -= this.user.attack; // attack the shield
+
         if (attack > 0) { // if attack is over 0 remove the rest from the life
           this.enemy.stats.life -= attack;
         }
@@ -115,7 +116,19 @@ export class GameService {
         // attack the user
         if (this.user.shield > 0) {  // if the user have shield
           let attack = this.enemy.stats.attack - this.user.shield; // save the attack
-          this.user.shield -= this.enemy.stats.attack; // attack the shield
+
+          if (this.inventory[1] != undefined) { // if the user has armor
+            // attack the armor and display the new value
+            if (this.user.activeArmor == undefined) {
+              return;
+            }
+            let shieldWithoutArmor = this.user.shield - this.user.activeArmor?.attack;
+            this.user.activeArmor.attack -= this.enemy.stats.attack;
+            this.user.shield = shieldWithoutArmor + this.inventory[1].shield;
+          } else { // when not
+            this.user.shield -= attack; // attack the shield
+          }
+
           if (attack > 0) { // if attack is over 0 remove the rest from the life
             this.user.health -= attack;
           }
