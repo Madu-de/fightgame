@@ -56,7 +56,7 @@ export class GameService {
     new Sword('sword_wood', 'Holzschwert', '', 2, 0, 0, 20, 5),
     new Sword('sword_stone', 'Steinschwert', '', 15, 0, 0, 50, 30),
     new Sword('sword_iron', 'Eisenschwert', '', 20, 0, 0, 80, 20),
-    new Sword('sword_gold', 'Goldschwert', '', 15, 0, 0, 100, 15),
+    new Sword('sword_gold', 'Goldschwert', '', 25, 0, 0, 100, 15),
 
     new Armor('armor_leather', 'Lederrüstung', '', 0, 0, 5, 20, 5),
     new Armor('armor_iron', 'Eisenrüstung', '', 0, 0, 20, 50, 20),
@@ -122,9 +122,14 @@ export class GameService {
             if (this.user.activeArmor == undefined) {
               return;
             }
-            let shieldWithoutArmor = this.user.shield - this.user.activeArmor?.attack;
-            this.user.activeArmor.attack -= this.enemy.stats.attack;
+            let shieldWithoutArmor = this.user.shield - this.user.activeArmor.shield;
+            this.inventory[1].shield -= this.enemy.stats.attack;
+            this.manageHotbar();
             this.user.shield = shieldWithoutArmor + this.inventory[1].shield;
+            if (this.user.activeArmor.shield <= 0) {
+              this.user.activeArmor = undefined;
+              this.inventory[1] = undefined;
+            }
           } else { // when not
             this.user.shield -= attack; // attack the shield
           }
@@ -188,6 +193,8 @@ export class GameService {
         this.card[0].classList.remove('none');
         this.saveInLocalStorage(this.user, this.enemy, this.inventory);
         this.managePotions();
+        this.manageActiveSword();
+        this.saveInLocalStorage(this.user, this.enemy, this.inventory);
       }, 100);
     }, 450);
   }
@@ -219,7 +226,21 @@ export class GameService {
           }
         }
       }
-      this.saveInLocalStorage(this.user, this.enemy, this.inventory);
+    }
+  }
+
+  private manageActiveSword() {
+    if (this.user.activeSword == undefined) {
+      return;
+    }
+    if (this.inventory[0] == undefined) {
+      return;
+    }
+    this.user.activeSword.uses--;
+    this.inventory[0].uses--;
+    if (this.user.activeSword.uses <= 0) {
+      this.inventory[0] = undefined;
+      this.manageHotbar();
     }
   }
 
@@ -236,7 +257,7 @@ export class GameService {
 
     if (swordPast != swordNow) {
       if (swordPast != undefined) {
-        this.user.removeAttack(swordPast?.attack);
+        this.user.removeAttack(swordPast.attack);
       }
       if (swordNow != undefined) {
         this.user.addAttack(swordNow.attack);
@@ -245,7 +266,7 @@ export class GameService {
 
     if (armorPast != armorNow) {
       if (armorPast != undefined) {
-        this.user.removeShield(armorPast?.shield);
+        this.user.removeShield(armorPast.shield);
       }
       if (armorNow != undefined) {
         this.user.addShield(armorNow.shield);
