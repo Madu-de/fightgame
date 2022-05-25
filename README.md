@@ -7,12 +7,15 @@ This project was generated with [Angular CLI](https://github.com/angular/angular
 ### Swords
 - sword_wood
 - sword_stone
+- sword_copper
 - sword_iron
 - sword_gold
 
 ### Armors
 - armor_leather
+- armor_wood
 - armor_iron
+- armor_gold
 - armor_gum
 
 ### Potions
