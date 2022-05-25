@@ -17,7 +17,7 @@ This project was generated with [Angular CLI](https://github.com/angular/angular
 - armor_copper
 - armor_iron
 - armor_gold
-- armor_gum
+- armor_rubber
 
 ### Potions
 - potion_heal
