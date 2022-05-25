@@ -14,6 +14,7 @@ This project was generated with [Angular CLI](https://github.com/angular/angular
 ### Armors
 - armor_leather
 - armor_wood
+- armor_copper
 - armor_iron
 - armor_gold
 - armor_gum
